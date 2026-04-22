@@ -122,3 +122,71 @@ Storing whole documents in a vector database causes:
 | `ChromaDB` | Local vector database — stores and searches chunks |
 | `Claude API` | Generation — answers questions using retrieved chunks |
 | `llm_judge.py` | Evaluates answer quality and faithfulness |
+
+---
+
+## How Text → Vector Conversion Works
+
+### Step by step
+
+**1. Tokenization — text split into pieces**
+```
+"how long to blanch green beans"
+→ ["how", "long", "to", "blanch", "green", "beans"]
+```
+
+**2. Neural network processes tokens**
+The embedding model is a small BERT-style neural network trained on millions of sentences to understand meaning. Each token is converted to a vector, then all tokens are combined into one vector representing the whole sentence.
+
+**3. Output — 384 numbers**
+```
+"how long to blanch green beans"
+→ [0.23, -0.87, 0.45, 0.12, -0.33, 0.67, ... × 384]
+```
+
+**4. Similar meaning = close vectors**
+```
+"how long to blanch green beans"  → [0.23, -0.87, 0.45, ...]  ← similar
+"blanching time for vegetables"   → [0.21, -0.85, 0.47, ...]  ← similar
+"how to temper chocolate"         → [-0.45, 0.33, -0.12, ...] ← far away
+```
+The model learned that "blanch" and "blanching time" are related — their vectors end up close in 384-dimensional space.
+
+**5. Cosine similarity — how search works**
+ChromaDB measures the angle between the query vector and every stored chunk vector. Small angle = similar meaning = high relevance score. The top N closest chunks are returned.
+
+---
+
+## Embedding Model — all-MiniLM-L6-v2
+
+| Property | Value |
+|---|---|
+| **Model name** | `all-MiniLM-L6-v2` |
+| **Made by** | Microsoft (via sentence-transformers library) |
+| **Architecture** | MiniLM — distilled (compressed) version of BERT |
+| **Output dimensions** | 384 |
+| **Max input tokens** | 256 tokens (~200 words) |
+| **Size** | ~80MB — fast to load and run |
+| **Trained on** | 1 billion+ sentence pairs from web, books, QA datasets |
+| **Similarity metric** | Cosine similarity |
+| **Speed** | Very fast — suitable for local use without GPU |
+
+### Why this model for our eval
+- No API key required — runs locally
+- Fast enough for 97 chunks without GPU
+- Good semantic understanding for cooking/English text
+- Industry standard for RAG prototypes and evals
+
+### Limitations
+- Max 256 tokens — chunks longer than ~200 words get truncated
+- Not fine-tuned on cooking domain — general purpose only
+- Smaller models can miss nuanced meaning vs larger models (e.g. OpenAI `text-embedding-3-large`)
+
+### Production alternatives
+| Model | Dimensions | Notes |
+|---|---|---|
+| `all-MiniLM-L6-v2` | 384 | Fast, local, free — good for prototypes |
+| `all-mpnet-base-v2` | 768 | Better accuracy, slower — still local |
+| OpenAI `text-embedding-3-small` | 1536 | API call, costs money, higher accuracy |
+| OpenAI `text-embedding-3-large` | 3072 | Best accuracy, higher cost |
+| Anthropic (no embedding API) | — | Anthropic does not offer an embedding model |
