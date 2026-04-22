@@ -193,7 +193,7 @@ Storing whole documents in a vector database causes:
 | 7 | Eval | Measure retrieval quality | Did the right chunk come back? | Claude | ✅ Done | `results/retrieval_eval.csv` / GitHub |
 | 8 | Eval | Measure generation quality | LLM-judge — correct answer? | Claude | ✅ Done | `results/judge_results_*.json` / GitHub |
 | 9 | Eval | Measure faithfulness | Did Claude stay within retrieved docs? | Claude | ✅ Done | `results/faithfulness_eval.csv` / GitHub |
-| 10 | Eval | Compare retrieval vs generation failures | Where does RAG break down? | Both | ⬅️ Next | `results/rag_analysis.md` / GitHub |
+| 10 | Eval | Compare retrieval vs generation failures | Where does RAG break down? | Both | ✅ Done | `results/rag_analysis.md` / GitHub |
 
 ---
 
