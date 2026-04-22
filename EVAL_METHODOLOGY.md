@@ -191,8 +191,8 @@ Storing whole documents in a vector database causes:
 | 5 | Pipeline | Build RAG pipeline | Retrieve + generate script | Claude | ✅ Done | `scripts/rag_pipeline.py` / GitHub |
 | 6 | Eval | Run 20 questions through pipeline | Bulk test → JSON results | Vipin | ✅ Done | `results/rag_results_20260422_143630.json` / GitHub |
 | 7 | Eval | Measure retrieval quality | Did the right chunk come back? | Claude | ✅ Done | `results/retrieval_eval.csv` / GitHub |
-| 8 | Eval | Measure generation quality | LLM-judge — correct answer? | Claude | ⬅️ Next | `results/judge_results_*.json` / GitHub |
-| 9 | Eval | Measure faithfulness | Did Claude stay within retrieved docs? | Claude | — | `results/faithfulness_eval.csv` / GitHub |
+| 8 | Eval | Measure generation quality | LLM-judge — correct answer? | Claude | ✅ Done | `results/judge_results_*.json` / GitHub |
+| 9 | Eval | Measure faithfulness | Did Claude stay within retrieved docs? | Claude | ⬅️ Next | `results/faithfulness_eval.csv` / GitHub |
 | 10 | Eval | Compare retrieval vs generation failures | Where does RAG break down? | Both | — | `results/rag_analysis.md` / GitHub |
 
 ---
@@ -362,6 +362,37 @@ Medium questions had the most failures because those questions used general cook
 | `rank_of_expected` | 1, 2, or 3 — or "not found" |
 | `distance_of_expected` | Cosine distance of the expected chunk if found |
 | `top_hit_distance` | Distance of the chunk that ranked #1 |
+
+---
+
+## LLM Judge — Step 8 Results
+
+**Script:** `scripts/llm_judge.py`
+**Judge prompt:** `prompts/judge_prompt.txt`
+**Output:** `results/judge_results_20260422_161419.json`
+
+### Pass rate by difficulty
+
+| Difficulty | Questions | Passed | Pass Rate |
+|---|---|---|---|
+| Easy | 7 | 7 | 100% |
+| Medium | 9 | 9 | 100% |
+| Hard | 4 | 4 | 100% |
+| **OVERALL** | **20** | **20** | **100%** |
+
+### Key insight — 100% pass rate despite 3 retrieval failures
+
+This is the most important finding of the eval. Even the 3 questions where retrieval failed (Q9, Q11, Q20) received a PASS from the judge. Why?
+
+| Q | Retrieval result | What Claude did | Judge verdict |
+|---|---|---|---|
+| Q9 | Wrong doc retrieved — got deglazing instead of reduction | Answered from deglazing chunks — answer was still useful and grounded | PASS |
+| Q11 | Wrong doc retrieved — got sautéing instead of deglazing | Answered partially from sautéing, noted limitations | PASS |
+| Q20 | Completely wrong doc — no relevant content | Said "I cannot answer this from the provided information" | PASS ✅ |
+
+**Q20 is the standout case:** The grounded constraint ("Answer using ONLY the information provided") worked exactly as designed. Claude had no relevant content, so it refused to hallucinate. The judge correctly rewarded this.
+
+**The lesson:** A well-designed grounding constraint turns retrieval failures into safe "I don't know" responses rather than confident wrong answers.
 
 ---
 
