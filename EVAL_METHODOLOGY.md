@@ -28,6 +28,61 @@ RAG has two parts — both can fail:
 
 ---
 
+## What is the RAG Pipeline
+
+The RAG pipeline connects three previously separate pieces:
+
+```
+ChromaDB (97 chunks as vectors)  +  Questions CSV  +  Claude API
+                    ↓
+              RAG Pipeline (rag_pipeline.py)
+```
+
+**For each question, the pipeline runs 4 steps:**
+
+```
+Question: "How long should I blanch green beans?"
+        ↓
+Step 1 — RETRIEVE
+  Search ChromaDB for top 3 most relevant chunks
+  → returns: Blanching/TIMING GUIDE, Blanching/HOW TO BLANCH, Steaming/STEAMING TIMES
+
+        ↓
+Step 2 — BUILD PROMPT
+  Inject retrieved chunks into Claude's context:
+  "Answer using ONLY the information below. Do not use outside knowledge.
+
+   [Blanching TIMING GUIDE chunk]
+   [Blanching HOW TO BLANCH chunk]
+   [Steaming STEAMING TIMES chunk]
+
+   Question: How long should I blanch green beans?"
+
+        ↓
+Step 3 — GENERATE
+  Claude answers using only retrieved content
+  → "Green beans should be blanched for 2-3 minutes..."
+
+        ↓
+Step 4 — SAVE
+  Store: question + retrieved chunks + Claude's answer + metadata
+```
+
+**Why "Answer using ONLY the information below" matters:**
+This constraint forces Claude to stay within the retrieved content — it cannot use outside knowledge. This is what makes faithfulness measurable. If Claude answers from general knowledge instead of the retrieved chunks, that is a faithfulness failure.
+
+**What gets saved for each question:**
+
+| Field saved | Used in which eval step |
+|---|---|
+| Question | All steps |
+| Retrieved chunk IDs | Step 7 — retrieval accuracy |
+| Retrieved chunk content | Step 9 — faithfulness |
+| Claude's answer | Step 8 — answer correctness |
+| Expected doc (from questions.csv) | Step 7 — compare against retrieved |
+
+---
+
 ## Document Store
 
 **20 cooking technique documents** — one topic per file.
