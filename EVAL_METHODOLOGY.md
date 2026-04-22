@@ -83,6 +83,45 @@ This constraint forces Claude to stay within the retrieved content — it cannot
 
 ---
 
+## What rag_pipeline.py Contains
+
+**4 functions — one per pipeline stage:**
+
+| Function | What it does |
+|---|---|
+| `retrieve()` | Searches ChromaDB, returns top 3 chunks with doc_id, topic, section, content, distance score |
+| `build_prompt()` | Takes 3 chunks + question, assembles grounded prompt with "Answer using ONLY this information" |
+| `generate()` | Sends grounded prompt to Claude API, returns answer + response time |
+| `main()` | Loops through all 20 questions, calls the 3 functions, saves everything to JSON |
+
+**JSON output structure per question:**
+```json
+{
+  "id": "1",
+  "question": "How long should I blanch green beans?",
+  "difficulty": "easy",
+  "expected_doc_id": "doc_01_blanching",
+  "retrieved_doc_ids": ["doc_01_blanching", "doc_19_steaming", "..."],
+  "retrieval_correct": true,
+  "top_hit_doc_id": "doc_01_blanching",
+  "top_hit_topic": "Blanching",
+  "top_hit_section": "TIMING GUIDE",
+  "chunks": [...],
+  "answer": "Green beans should be blanched for 2-3 minutes...",
+  "duration_ms": 3200
+}
+```
+
+**The key design decision — grounding constraint:**
+```
+"Answer using ONLY the information provided below.
+Do not use outside knowledge."
+```
+Without this, Claude answers from training data and faithfulness cannot be measured.
+This one constraint is what makes Steps 8 and 9 possible.
+
+---
+
 ## Document Store
 
 **20 cooking technique documents** — one topic per file.
