@@ -93,7 +93,7 @@ Storing whole documents in a vector database causes:
 | 1 | Setup | Create knowledge base | 20 cooking technique documents | Claude | ✅ Done | `data/docs/` / GitHub |
 | 2 | Setup | Split documents into searchable pieces | Section-based chunking script | Claude | ✅ Done | `scripts/chunk_docs.py` / GitHub |
 | 3 | Setup | Build vector database | Load chunks into ChromaDB | Claude | — | `scripts/build_index.py` / local |
-| 4 | Setup | Create test questions | 20 questions answerable from the docs | Both | — | `data/questions.csv` / GitHub |
+| 4 | Setup | Create test questions | 20 questions answerable from the docs | Both | ✅ Done | `data/questions.csv` / GitHub |
 | 5 | Pipeline | Build RAG pipeline | Retrieve + generate script | Claude | — | `scripts/rag_pipeline.py` / GitHub |
 | 6 | Eval | Run 20 questions through pipeline | Bulk test → JSON results | Vipin | — | `results/rag_results_*.json` / GitHub |
 | 7 | Eval | Measure retrieval quality | Did the right chunk come back? | Claude | — | `results/retrieval_eval.csv` / GitHub |

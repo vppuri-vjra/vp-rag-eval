@@ -1,0 +1,21 @@
+id,question,expected_doc_id,expected_section,difficulty
+1,How long should I blanch green beans?,doc_01_blanching,TIMING GUIDE,easy
+2,Why does overcrowding a pan prevent browning when sautéing?,doc_02_sauteing,COMMON MISTAKES,medium
+3,What ingredient in egg yolks makes mayonnaise stable?,doc_03_emulsification,COMMON EMULSIFIERS,medium
+4,What cuts of beef work best for braising?,doc_04_braising,BEST CUTS FOR BRAISING,easy
+5,How do I caramelize onions properly and how long does it take?,doc_05_caramelization,HOW TO CARAMELIZE ONIONS,easy
+6,Why can't you brown meat by boiling it?,doc_06_maillard_reaction,WHY BOILING OR STEAMING CANNOT BROWN FOOD,hard
+7,What is the salt to water ratio for a basic wet brine?,doc_07_brining,WET BRINE RATIO,easy
+8,How do I test if chocolate is properly tempered?,doc_08_tempering_chocolate,SEEDING METHOD (easier),medium
+9,How do I build a pan sauce after searing meat?,doc_09_reduction,PAN SAUCE METHOD,medium
+10,Why does vinegar help when poaching eggs?,doc_10_poaching,WHY VINEGAR HELPS,hard
+11,What is fond and why is it important for flavor?,doc_11_deglazing,WHAT IS FOND,medium
+12,How long should I marinate fish or seafood?,doc_12_marinating,MARINATING TIMES,easy
+13,What is the difference between wet and dry rendering fat?,doc_13_rendering_fat,WET VS DRY RENDERING,medium
+14,What happens if I burn spices while blooming them?,doc_14_blooming_spices,COMMON MISTAKES,medium
+15,How much does internal temperature rise after removing meat from heat?,doc_15_resting_meat,CARRYOVER COOKING,hard
+16,Why should I use a spatula instead of a whisk when folding egg whites?,doc_16_folding,COMMON MISTAKES,medium
+17,How do I restore a rusty cast iron pan?,doc_17_seasoning_cast_iron,RESTORING RUSTY CAST IRON,easy
+18,What happens if I add cold liquid to a roux?,doc_18_making_roux,COMMON MISTAKES,medium
+19,How do aromatics added to steaming water affect the food?,doc_19_steaming,FLAVOR ENHANCEMENT,hard
+20,What is the claw grip and why is it important?,doc_20_knife_skills,THE CLAW GRIP,easy
