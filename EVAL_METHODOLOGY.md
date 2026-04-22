@@ -192,8 +192,8 @@ Storing whole documents in a vector database causes:
 | 6 | Eval | Run 20 questions through pipeline | Bulk test → JSON results | Vipin | ✅ Done | `results/rag_results_20260422_143630.json` / GitHub |
 | 7 | Eval | Measure retrieval quality | Did the right chunk come back? | Claude | ✅ Done | `results/retrieval_eval.csv` / GitHub |
 | 8 | Eval | Measure generation quality | LLM-judge — correct answer? | Claude | ✅ Done | `results/judge_results_*.json` / GitHub |
-| 9 | Eval | Measure faithfulness | Did Claude stay within retrieved docs? | Claude | ⬅️ Next | `results/faithfulness_eval.csv` / GitHub |
-| 10 | Eval | Compare retrieval vs generation failures | Where does RAG break down? | Both | — | `results/rag_analysis.md` / GitHub |
+| 9 | Eval | Measure faithfulness | Did Claude stay within retrieved docs? | Claude | ✅ Done | `results/faithfulness_eval.csv` / GitHub |
+| 10 | Eval | Compare retrieval vs generation failures | Where does RAG break down? | Both | ⬅️ Next | `results/rag_analysis.md` / GitHub |
 
 ---
 
@@ -393,6 +393,44 @@ This is the most important finding of the eval. Even the 3 questions where retri
 **Q20 is the standout case:** The grounded constraint ("Answer using ONLY the information provided") worked exactly as designed. Claude had no relevant content, so it refused to hallucinate. The judge correctly rewarded this.
 
 **The lesson:** A well-designed grounding constraint turns retrieval failures into safe "I don't know" responses rather than confident wrong answers.
+
+---
+
+## Faithfulness Eval — Step 9 Results
+
+**Script:** `scripts/faithfulness_eval.py`
+**Output:** `results/faithfulness_eval.csv`
+**Source:** Extracts `GROUNDED` scores from `judge_results_*.json` — no extra API calls needed.
+
+### Faithfulness rate
+
+| Difficulty | Questions | Faithful | Rate |
+|---|---|---|---|
+| Easy | 7 | 7 | 100% |
+| Medium | 9 | 9 | 100% |
+| Hard | 4 | 4 | 100% |
+| **OVERALL** | **20** | **20** | **100%** |
+
+### Cross-tab — Retrieval × Faithfulness
+
+| Retrieval | Faithfulness | Count | What it means |
+|---|---|---|---|
+| ✅ PASS | ✅ PASS | 17 | Right doc found, answered correctly from it |
+| ❌ FAIL | ✅ PASS | 3 | Wrong doc found — but Claude stayed grounded (safe refusal or partial answer) |
+| ✅ PASS | ❌ FAIL | 0 | Right doc found but Claude hallucinated — did not happen |
+| ❌ FAIL | ❌ FAIL | 0 | Wrong doc + hallucination — worst case — did not happen |
+
+### Key insight — the grounding constraint eliminated hallucination
+
+The 3 retrieval failures (Q9, Q11, Q20) all landed in the **"Retrieval FAIL + Faithful PASS"** box. Claude answered from whatever chunks it received — it did not reach outside them.
+
+This is the grounding constraint doing its job:
+```
+"Answer using ONLY the information provided below.
+Do not use outside knowledge."
+```
+
+Without this constraint, a retrieval failure would likely cause a hallucination. With it, retrieval failure → partial answer or safe refusal.
 
 ---
 
