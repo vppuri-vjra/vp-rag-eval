@@ -1,0 +1,28 @@
+id,difficulty,question,expected_doc_id,got_doc_id,retrieval_correct,rank_of_expected,distance_of_expected,top_hit_distance,top_hit_topic
+1,easy,How long should I blanch green beans?,doc_01_blanching,doc_01_blanching,yes,1,0.3673,0.3673,Blanching
+2,medium,Why does overcrowding a pan prevent browning when sautéing?,doc_02_sauteing,doc_02_sauteing,yes,1,0.2919,0.2919,Sautéing
+3,medium,What ingredient in egg yolks makes mayonnaise stable?,doc_03_emulsification,doc_03_emulsification,yes,1,0.3512,0.3512,Emulsification
+4,easy,What cuts of beef work best for braising?,doc_04_braising,doc_04_braising,yes,1,0.3966,0.3966,Braising
+5,easy,How do I caramelize onions properly and how long does it take?,doc_05_caramelization,doc_05_caramelization,yes,1,0.2307,0.2307,Caramelization
+6,hard,Why can't you brown meat by boiling it?,doc_06_maillard_reaction,doc_06_maillard_reaction,yes,1,0.495,0.495,Maillard Reaction
+7,easy,What is the salt to water ratio for a basic wet brine?,doc_07_brining,doc_07_brining,yes,1,0.3917,0.3917,Brining
+8,medium,How do I test if chocolate is properly tempered?,doc_08_tempering_chocolate,doc_08_tempering_chocolate,yes,1,0.3015,0.3015,Tempering Chocolate
+9,medium,How do I build a pan sauce after searing meat?,doc_09_reduction,doc_11_deglazing,no,not found,—,0.4418,Deglazing
+10,hard,Why does vinegar help when poaching eggs?,doc_10_poaching,doc_10_poaching,yes,1,0.5082,0.5082,Poaching
+11,medium,What is fond and why is it important for flavor?,doc_11_deglazing,doc_02_sauteing,no,not found,—,0.459,Sautéing
+12,easy,How long should I marinate fish or seafood?,doc_12_marinating,doc_12_marinating,yes,1,0.3015,0.3015,Marinating
+13,medium,What is the difference between wet and dry rendering fat?,doc_13_rendering_fat,doc_13_rendering_fat,yes,1,0.3926,0.3926,Rendering Fat
+14,medium,What happens if I burn spices while blooming them?,doc_14_blooming_spices,doc_14_blooming_spices,yes,1,0.333,0.333,Blooming Spices
+15,hard,How much does internal temperature rise after removing meat from heat?,doc_15_resting_meat,doc_15_resting_meat,yes,1,0.2073,0.2073,Resting Meat
+16,medium,Why should I use a spatula instead of a whisk when folding egg whites?,doc_16_folding,doc_16_folding,yes,1,0.3956,0.3956,Folding vs Stirring
+17,easy,How do I restore a rusty cast iron pan?,doc_17_seasoning_cast_iron,doc_17_seasoning_cast_iron,yes,1,0.4028,0.4028,Seasoning Cast Iron
+18,medium,What happens if I add cold liquid to a roux?,doc_18_making_roux,doc_18_making_roux,yes,1,0.6112,0.6112,Making a Roux
+19,hard,How do aromatics added to steaming water affect the food?,doc_19_steaming,doc_19_steaming,yes,1,0.3128,0.3128,Steaming
+20,easy,What is the claw grip and why is it important?,doc_20_knife_skills,doc_12_marinating,no,not found,—,0.7896,Marinating
+
+# SUMMARY BY DIFFICULTY
+difficulty,total,correct,accuracy
+easy,7,6,85.7%
+medium,9,7,77.8%
+hard,4,4,100.0%
+overall,20,17,85.0%

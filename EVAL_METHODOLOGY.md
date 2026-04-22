@@ -190,8 +190,8 @@ Storing whole documents in a vector database causes:
 | 4 | Setup | Create test questions | 20 questions with expected doc + difficulty | Both | ✅ Done | `data/questions.csv` / GitHub |
 | 5 | Pipeline | Build RAG pipeline | Retrieve + generate script | Claude | ✅ Done | `scripts/rag_pipeline.py` / GitHub |
 | 6 | Eval | Run 20 questions through pipeline | Bulk test → JSON results | Vipin | ✅ Done | `results/rag_results_20260422_143630.json` / GitHub |
-| 7 | Eval | Measure retrieval quality | Did the right chunk come back? | Claude | ⬅️ Next | `results/retrieval_eval.csv` / GitHub |
-| 8 | Eval | Measure generation quality | LLM-judge — correct answer? | Claude | — | `results/judge_results_*.json` / GitHub |
+| 7 | Eval | Measure retrieval quality | Did the right chunk come back? | Claude | ✅ Done | `results/retrieval_eval.csv` / GitHub |
+| 8 | Eval | Measure generation quality | LLM-judge — correct answer? | Claude | ⬅️ Next | `results/judge_results_*.json` / GitHub |
 | 9 | Eval | Measure faithfulness | Did Claude stay within retrieved docs? | Claude | — | `results/faithfulness_eval.csv` / GitHub |
 | 10 | Eval | Compare retrieval vs generation failures | Where does RAG break down? | Both | — | `results/rag_analysis.md` / GitHub |
 
@@ -269,6 +269,37 @@ ChromaDB does not know our ground truth. It just finds the closest vectors.
 |---|---|---|
 | Semantic overlap — concept exists in multiple docs | Q9, Q11 | Add topic labels to chunk content, or hybrid search |
 | Unique term — no semantic neighbors | Q20 | Add keyword-based retrieval as fallback (hybrid search) |
+
+---
+
+## Retrieval Eval — Step 7 Results
+
+**Script:** `scripts/retrieval_eval.py`
+**Output:** `results/retrieval_eval.csv`
+
+### Accuracy by difficulty
+
+| Difficulty | Questions | Correct | Accuracy |
+|---|---|---|---|
+| Easy | 7 | 6 | 85.7% |
+| Medium | 9 | 7 | 77.8% |
+| Hard | 4 | 4 | 100.0% |
+| **OVERALL** | **20** | **17** | **85.0%** |
+
+### Key insight — Hard questions got 100%
+
+Hard questions in this eval were questions where the answer was in a very specific doc and the question used clear topic-specific language (e.g. "Why can't you brown meat by boiling it?" → Maillard reaction doc). The model found these easily.
+
+Medium questions had the most failures because those questions used general cooking language that overlapped between multiple docs ("pan sauce", "fond").
+
+### What retrieval_eval.py produces per question
+
+| Column | What it means |
+|---|---|
+| `retrieval_correct` | yes / no — was expected doc in top-3? |
+| `rank_of_expected` | 1, 2, or 3 — or "not found" |
+| `distance_of_expected` | Cosine distance of the expected chunk if found |
+| `top_hit_distance` | Distance of the chunk that ranked #1 |
 
 ---
 
