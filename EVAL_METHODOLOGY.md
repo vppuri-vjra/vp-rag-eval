@@ -438,12 +438,43 @@ This is the most important finding of the eval. Even the 3 questions where retri
 
 ### Cross-tab — Retrieval × Faithfulness
 
-| Retrieval | Faithfulness | Count | What it means |
+**✅ Retrieval PASS + ✅ Faithful PASS — 17 questions**
+
+| Q | Question | Answerer Response | Judge Reason |
 |---|---|---|---|
-| ✅ PASS | ✅ PASS | 17 | Right doc found, answered correctly from it |
-| ❌ FAIL | ✅ PASS | 3 | Wrong doc found — Claude stayed grounded (partial answer or safe refusal) |
-| ✅ PASS | ❌ FAIL | 0 | Right doc found but Claude hallucinated — **did not happen** |
-| ❌ FAIL | ❌ FAIL | 0 | Wrong doc + hallucination — worst case — **did not happen** |
+| 1 | How long should I blanch green beans? | Blanch for **2-3 minutes** | Correct, matches Source 1 exactly |
+| 2 | Why does overcrowding a pan prevent browning? | Food **steams instead of browns**; noted mechanism not in chunks | Correct outcome, acknowledged limitation, no hallucination |
+| 3 | What ingredient in egg yolks makes mayonnaise stable? | **Lecithin** in egg yolks stabilises mayonnaise | Correct, directly from Source 1 |
+| 4 | What cuts of beef work best for braising? | **Short ribs and brisket** — collagen-rich, tenderised by slow cooking | Correct cuts and reason, stays within chunks |
+| 5 | How do I caramelize onions and how long does it take? | Medium-low heat, stir occasionally, **45-60 minutes** | All info from chunks, nothing added |
+| 6 | Why can't you brown meat by boiling it? | Maillard needs **>280°F and dry surface**; boiling = 212°F max + wet | Both conditions correct per Source 1 |
+| 7 | What is the salt to water ratio for a basic wet brine? | **1 cup kosher salt per 1 gallon of water** | Direct match to Source 1 |
+| 8 | How do I test if chocolate is properly tempered? | Dip knife tip — sets in **3-5 minutes** with **glossy finish** | Exact extraction from Source 1 |
+| 10 | Why does vinegar help when poaching eggs? | **"I cannot answer this"** — chunks mention vinegar but don't explain why | Correct refusal — chunks had fact but not explanation |
+| 12 | How long should I marinate fish or seafood? | **15-30 minutes only** — acid "cooks" fish, makes it mushy | Time and reason both from chunks |
+| 13 | What is the difference between wet and dry rendering fat? | Wet = water, lighter, less flavour. Dry = no water, more flavour, darker | Complete and accurate summary |
+| 14 | What happens if I burn spices while blooming them? | Turn **bitter**, result is **irreversible** — must start over | Direct match to Source 1 |
+| 15 | How much does internal temperature rise after removing meat? | Small **3-5°F**, medium **5-10°F**, large **10-15°F** | All three ranges reproduced accurately |
+| 16 | Why use a spatula instead of a whisk when folding egg whites? | Whisk is **"too aggressive"** and **breaks bubbles** | Correct, grounded in Source 1 |
+| 17 | How do I restore a rusty cast iron pan? | Scrub → wash → dry → re-season (full 8-step process) | Combines two chunks correctly |
+| 18 | What happens if I add cold liquid to a roux? | **Causes lumps** — add warm or hot liquid | Direct citation from Source 1 |
+| 19 | How do aromatics added to steaming water affect the food? | Steam carries **subtle flavour**; place aromatics under/around basket | Accurate extraction from Source 2 |
+
+---
+
+**❌ Retrieval FAIL + ✅ Faithful PASS — 3 questions** ← grounding constraint worked
+
+| Q | Question | Answerer Response | Judge Reason |
+|---|---|---|---|
+| 9 | How do I build a pan sauce after searing meat? | Partial answer from deglazing chunks (what to avoid); flagged full steps not available | Used what was available, correctly flagged limitation — no hallucination |
+| 11 | What is fond and why is it important for flavor? | **Fond = browned bits** on pan bottom, used for sauces; noted detail not in chunks | Correct partial definition from sautéing chunk, acknowledged limitation |
+| 20 | What is the claw grip and why is it important? | **"I cannot answer this"** — retrieved chunks had no relevant content | Correct refusal — grounding constraint prevented hallucination |
+
+---
+
+**✅ Retrieval PASS + ❌ Faithful FAIL — 0 questions** ← never hallucinated despite right chunks
+
+**❌ Retrieval FAIL + ❌ Faithful FAIL — 0 questions** ← worst case never happened
 
 ### Key insight — the grounding constraint eliminated hallucination
 
