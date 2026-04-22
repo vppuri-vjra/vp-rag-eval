@@ -186,14 +186,89 @@ Storing whole documents in a vector database causes:
 |------|------|---------|------|-------|--------|----------|
 | 1 | Setup | Create knowledge base | 20 cooking technique documents | Claude | ✅ Done | `data/docs/` / GitHub |
 | 2 | Setup | Split documents into searchable pieces | Section-based chunking script | Claude | ✅ Done | `scripts/chunk_docs.py` / GitHub |
-| 3 | Setup | Build vector database | Load chunks into ChromaDB | Claude | — | `scripts/build_index.py` / local |
-| 4 | Setup | Create test questions | 20 questions answerable from the docs | Both | ✅ Done | `data/questions.csv` / GitHub |
+| 3 | Setup | Build vector database | Load 97 chunks into ChromaDB | Claude | ✅ Done | `scripts/build_index.py` / GitHub |
+| 4 | Setup | Create test questions | 20 questions with expected doc + difficulty | Both | ✅ Done | `data/questions.csv` / GitHub |
 | 5 | Pipeline | Build RAG pipeline | Retrieve + generate script | Claude | ✅ Done | `scripts/rag_pipeline.py` / GitHub |
-| 6 | Eval | Run 20 questions through pipeline | Bulk test → JSON results | Vipin | — | `results/rag_results_*.json` / GitHub |
-| 7 | Eval | Measure retrieval quality | Did the right chunk come back? | Claude | — | `results/retrieval_eval.csv` / GitHub |
+| 6 | Eval | Run 20 questions through pipeline | Bulk test → JSON results | Vipin | ✅ Done | `results/rag_results_20260422_143630.json` / GitHub |
+| 7 | Eval | Measure retrieval quality | Did the right chunk come back? | Claude | ⬅️ Next | `results/retrieval_eval.csv` / GitHub |
 | 8 | Eval | Measure generation quality | LLM-judge — correct answer? | Claude | — | `results/judge_results_*.json` / GitHub |
 | 9 | Eval | Measure faithfulness | Did Claude stay within retrieved docs? | Claude | — | `results/faithfulness_eval.csv` / GitHub |
 | 10 | Eval | Compare retrieval vs generation failures | Where does RAG break down? | Both | — | `results/rag_analysis.md` / GitHub |
+
+---
+
+## Expected Doc vs Got Doc — Why They Differ
+
+### Expected Doc — human-defined ground truth
+When we wrote the 20 questions in Step 4, we manually tagged each with the document we knew contained the answer:
+
+```
+id, question,                          expected_doc_id,    expected_section
+9,  "How do I build a pan sauce?",     doc_09_reduction,   PAN SAUCE METHOD
+```
+
+This is our ground truth — we know the right answer is in the reduction doc because we wrote both the document and the question.
+
+### Got Doc — ChromaDB decided at runtime
+When the pipeline ran, ChromaDB searched the vector database and returned the top 3 closest chunks by cosine similarity. It returned `doc_11_deglazing` — not because it was wrong in a dumb way, but because deglazing chunks were vectorially closer to the query than reduction chunks.
+
+ChromaDB does not know our ground truth. It just finds the closest vectors.
+
+| | Expected Doc | Got Doc |
+|---|---|---|
+| Who decided | Us (humans) | ChromaDB (algorithm) |
+| When | Step 4 — before running | Step 6 — at runtime |
+| Based on | Knowledge of document content | Vector similarity |
+| Purpose | Ground truth for eval | Actual retrieval result |
+
+**The gap between Expected and Got is exactly what retrieval accuracy measures.**
+
+---
+
+## Retrieval Failure Analysis — Step 6 Results
+
+**Retrieval Accuracy: 85% (17/20)**
+
+### 3 Retrieval Failures
+
+| Q | Question | Expected Doc | Expected Section | Expected Chunk ID | Got Doc | Why it failed |
+|---|---|---|---|---|---|---|
+| 9 | "How do I build a pan sauce?" | `doc_09_reduction` | PAN SAUCE METHOD | `doc_09_reduction__pan_sauce_method` | `doc_11_deglazing` | Pan sauce exists in both docs — semantic overlap |
+| 11 | "What is fond and why important?" | `doc_11_deglazing` | WHAT IS FOND | `doc_11_deglazing__what_is_fond` | `doc_02_sauteing` | "Fond" mentioned in Sautéing doc — keyword confusion |
+| 20 | "What is the claw grip?" | `doc_20_knife_skills` | THE CLAW GRIP | `doc_20_knife_skills__the_claw_grip` | `doc_12_marinating` | "Claw grip" too specific — no semantic neighbors in other chunks |
+
+### Chunks retrieved for each failure
+
+**Q9 — "How do I build a pan sauce after searing meat?"**
+
+| Rank | Expected | Actually Retrieved | Section | Distance |
+|---|---|---|---|---|
+| 1 | `doc_09_reduction` / PAN SAUCE METHOD | `doc_11_deglazing` | DO NOT | 0.44 |
+| 2 | `doc_09_reduction` / PAN SAUCE METHOD | `doc_04_braising` | HOW TO BRAISE | 0.47 |
+| 3 | `doc_09_reduction` / PAN SAUCE METHOD | `doc_02_sauteing` | HOW TO SAUTÉ | 0.48 |
+
+**Q11 — "What is fond and why is it important for flavor?"**
+
+| Rank | Expected | Actually Retrieved | Section | Distance |
+|---|---|---|---|---|
+| 1 | `doc_11_deglazing` / WHAT IS FOND | `doc_02_sauteing` | PURPOSE | 0.46 |
+| 2 | `doc_11_deglazing` / WHAT IS FOND | `doc_12_marinating` | THREE COMPONENTS OF A MARINADE | 0.49 |
+| 3 | `doc_11_deglazing` / WHAT IS FOND | `doc_12_marinating` | WHAT A MARINADE DOES | 0.50 |
+
+**Q20 — "What is the claw grip and why is it important?"**
+
+| Rank | Expected | Actually Retrieved | Section | Distance |
+|---|---|---|---|---|
+| 1 | `doc_20_knife_skills` / THE CLAW GRIP | `doc_12_marinating` | WHAT A MARINADE DOES | 0.79 |
+| 2 | `doc_20_knife_skills` / THE CLAW GRIP | `doc_10_poaching` | PURPOSE | 0.82 |
+| 3 | `doc_20_knife_skills` / THE CLAW GRIP | `doc_15_resting_meat` | WHAT HAPPENS DURING RESTING | 0.83 |
+
+### Failure patterns and fixes
+
+| Failure type | Questions | Fix |
+|---|---|---|
+| Semantic overlap — concept exists in multiple docs | Q9, Q11 | Add topic labels to chunk content, or hybrid search |
+| Unique term — no semantic neighbors | Q20 | Add keyword-based retrieval as fallback (hybrid search) |
 
 ---
 
