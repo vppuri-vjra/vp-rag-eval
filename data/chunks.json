@@ -1,0 +1,681 @@
+[
+  {
+    "doc_id": "doc_01_blanching",
+    "topic": "Blanching",
+    "section": "PURPOSE",
+    "content": "- Preserves the bright color of vegetables (especially greens like broccoli and green beans)\n- Partially cooks vegetables before freezing to deactivate enzymes that cause deterioration\n- Loosens the skin of tomatoes, peaches, and almonds for easy peeling\n- Removes bitterness from vegetables like kale or Brussels sprouts",
+    "chunk_id": "doc_01_blanching__purpose"
+  },
+  {
+    "doc_id": "doc_01_blanching",
+    "topic": "Blanching",
+    "section": "HOW TO BLANCH",
+    "content": "1. Bring a large pot of salted water to a rolling boil\n2. Prepare an ice bath (bowl of water with plenty of ice)\n3. Drop vegetables into boiling water — do not overcrowd\n4. Cook for 1-3 minutes depending on vegetable size and density\n5. Remove immediately with a slotted spoon or strainer\n6. Transfer directly to ice bath for the same amount of time as blanching\n7. Drain and pat dry",
+    "chunk_id": "doc_01_blanching__how_to_blanch"
+  },
+  {
+    "doc_id": "doc_01_blanching",
+    "topic": "Blanching",
+    "section": "TIMING GUIDE",
+    "content": "- Green beans: 2-3 minutes\n- Broccoli florets: 2 minutes\n- Spinach: 30 seconds\n- Asparagus: 1-2 minutes\n- Tomatoes (for peeling): 30-60 seconds until skin cracks",
+    "chunk_id": "doc_01_blanching__timing_guide"
+  },
+  {
+    "doc_id": "doc_01_blanching",
+    "topic": "Blanching",
+    "section": "KEY TIPS",
+    "content": "- Use plenty of water so temperature does not drop when vegetables are added\n- Salt the water generously — it raises the boiling point slightly and seasons the vegetable\n- The ice bath must be ready before you start — timing is critical\n- Blanched vegetables should be vibrant and slightly crisp, not fully cooked",
+    "chunk_id": "doc_01_blanching__key_tips"
+  },
+  {
+    "doc_id": "doc_02_sauteing",
+    "topic": "Sautéing",
+    "section": "PURPOSE",
+    "content": "- Cooks food quickly while developing flavor through browning\n- Ideal for tender vegetables, thinly sliced meat, and seafood\n- Creates fond (browned bits) on the pan bottom for building sauces",
+    "chunk_id": "doc_02_sauteing__purpose"
+  },
+  {
+    "doc_id": "doc_02_sauteing",
+    "topic": "Sautéing",
+    "section": "HOW TO SAUTÉ",
+    "content": "1. Heat the pan over medium-high to high heat before adding fat\n2. Add fat (oil or butter) — it should shimmer immediately\n3. Add food in a single layer — do not overcrowd\n4. Allow food to sit undisturbed briefly to develop color\n5. Toss or stir to cook evenly\n6. Remove from heat as soon as food is cooked through",
+    "chunk_id": "doc_02_sauteing__how_to_sauté"
+  },
+  {
+    "doc_id": "doc_02_sauteing",
+    "topic": "Sautéing",
+    "section": "KEY DIFFERENCES FROM RELATED TECHNIQUES",
+    "content": "- Sautéing uses high heat and small fat — food cooks fast\n- Pan-frying uses more fat and medium heat — food cooks slower\n- Stir-frying uses very high heat and constant movement — no resting",
+    "chunk_id": "doc_02_sauteing__key_differences_from_related_techniques"
+  },
+  {
+    "doc_id": "doc_02_sauteing",
+    "topic": "Sautéing",
+    "section": "FAT CHOICE",
+    "content": "- High smoke point oils (avocado, canola, vegetable) for high heat\n- Butter adds flavor but burns above 300°F — use clarified butter for high heat\n- Olive oil suitable for medium-high heat, not screaming hot",
+    "chunk_id": "doc_02_sauteing__fat_choice"
+  },
+  {
+    "doc_id": "doc_02_sauteing",
+    "topic": "Sautéing",
+    "section": "COMMON MISTAKES",
+    "content": "- Overcrowding the pan — food steams instead of browns\n- Pan not hot enough before adding food — food sticks and steams\n- Moving food too much — prevents browning (Maillard reaction)\n- Using too much fat — becomes pan-frying not sautéing",
+    "chunk_id": "doc_02_sauteing__common_mistakes"
+  },
+  {
+    "doc_id": "doc_03_emulsification",
+    "topic": "Emulsification",
+    "section": "COMMON EMULSIFIERS",
+    "content": "- Lecithin (found in egg yolks) — used in mayonnaise, hollandaise, aioli\n- Mustard — contains mucilage that acts as an emulsifier, used in vinaigrettes\n- Honey — used in salad dressings\n- Garlic — contains natural emulsifying compounds",
+    "chunk_id": "doc_03_emulsification__common_emulsifiers"
+  },
+  {
+    "doc_id": "doc_03_emulsification",
+    "topic": "Emulsification",
+    "section": "TYPES OF EMULSIONS",
+    "content": "- Temporary: vinaigrette shaken before use — separates quickly\n- Semi-permanent: mustard vinaigrette — holds for hours\n- Permanent: mayonnaise — stable indefinitely if refrigerated",
+    "chunk_id": "doc_03_emulsification__types_of_emulsions"
+  },
+  {
+    "doc_id": "doc_03_emulsification",
+    "topic": "Emulsification",
+    "section": "HOW TO MAKE MAYONNAISE (classic emulsion)",
+    "content": "1. Whisk egg yolks with mustard and a little vinegar\n2. Add oil drop by drop while whisking constantly — this is critical\n3. As emulsion forms, oil can be added in a thin stream\n4. Season with salt and lemon juice",
+    "chunk_id": "doc_03_emulsification__how_to_make_mayonnaise_(classic_emulsion)"
+  },
+  {
+    "doc_id": "doc_03_emulsification",
+    "topic": "Emulsification",
+    "section": "BROKEN EMULSIONS",
+    "content": "An emulsion breaks when oil droplets coalesce back together.\n- Caused by: adding oil too fast, too much oil, temperature changes\n- Fix: start fresh with a new yolk and slowly whisk the broken emulsion into it",
+    "chunk_id": "doc_03_emulsification__broken_emulsions"
+  },
+  {
+    "doc_id": "doc_03_emulsification",
+    "topic": "Emulsification",
+    "section": "COOKING APPLICATIONS",
+    "content": "- Mayonnaise and aioli\n- Hollandaise and béarnaise sauce\n- Vinaigrette\n- Butter sauces (beurre blanc)\n- Chocolate ganache",
+    "chunk_id": "doc_03_emulsification__cooking_applications"
+  },
+  {
+    "doc_id": "doc_04_braising",
+    "topic": "Braising",
+    "section": "PURPOSE",
+    "content": "- Tenderizes tough, collagen-rich cuts of meat (short ribs, brisket, lamb shank, pork shoulder)\n- Develops deep, complex flavor through long slow cooking\n- Collagen breaks down into gelatin, creating rich, silky braising liquid",
+    "chunk_id": "doc_04_braising__purpose"
+  },
+  {
+    "doc_id": "doc_04_braising",
+    "topic": "Braising",
+    "section": "HOW TO BRAISE",
+    "content": "1. Pat meat dry and season generously with salt and pepper\n2. Heat oil in a heavy pot (Dutch oven) over high heat\n3. Sear meat on all sides until deeply browned — do not skip this step\n4. Remove meat, sauté aromatics (onion, carrot, celery, garlic)\n5. Deglaze with wine or stock, scraping up browned bits\n6. Return meat to pot — liquid should come halfway up the meat, not cover it\n7. Cover tightly and cook at 300-325°F (150-160°C) for 2-4 hours\n8. Meat is done when fork-tender and pulls apart easily",
+    "chunk_id": "doc_04_braising__how_to_braise"
+  },
+  {
+    "doc_id": "doc_04_braising",
+    "topic": "Braising",
+    "section": "KEY PRINCIPLES",
+    "content": "- Low and slow — high heat makes tough meat tougher\n- Liquid level: halfway up, not submerged (that is stewing)\n- Tight lid traps steam and creates a self-basting environment\n- Searing is not about sealing juices — it is about flavor through Maillard reaction",
+    "chunk_id": "doc_04_braising__key_principles"
+  },
+  {
+    "doc_id": "doc_04_braising",
+    "topic": "Braising",
+    "section": "BEST CUTS FOR BRAISING",
+    "content": "- Beef: short ribs, brisket, chuck roast, oxtail\n- Pork: shoulder, belly, hocks\n- Lamb: shoulder, shank, neck\n- Chicken: thighs and legs (not breast — too lean)",
+    "chunk_id": "doc_04_braising__best_cuts_for_braising"
+  },
+  {
+    "doc_id": "doc_04_braising",
+    "topic": "Braising",
+    "section": "BRAISING LIQUID OPTIONS",
+    "content": "- Red wine + stock (classic beef braise)\n- White wine + stock (chicken, pork, fish)\n- Beer (short ribs, pork)\n- Tomatoes + stock (Italian-style)\n- Milk or cream (pork loin alla latte)",
+    "chunk_id": "doc_04_braising__braising_liquid_options"
+  },
+  {
+    "doc_id": "doc_05_caramelization",
+    "topic": "Caramelization",
+    "section": "HOW IT WORKS",
+    "content": "When sugar is heated above its melting point, it undergoes pyrolysis — molecules break apart and recombine into new compounds. Different sugars caramelize at different temperatures:\n- Fructose: 230°F (110°C)\n- Glucose: 320°F (160°C)\n- Sucrose (table sugar): 340°F (170°C)\n- Lactose (milk sugar): 390°F (200°C)",
+    "chunk_id": "doc_05_caramelization__how_it_works"
+  },
+  {
+    "doc_id": "doc_05_caramelization",
+    "topic": "Caramelization",
+    "section": "CARAMELIZATION VS MAILLARD REACTION",
+    "content": "- Caramelization: sugar only, no protein needed\n- Maillard reaction: requires both sugar and protein (amino acids)\n- Both produce browning but different flavors",
+    "chunk_id": "doc_05_caramelization__caramelization_vs_maillard_reaction"
+  },
+  {
+    "doc_id": "doc_05_caramelization",
+    "topic": "Caramelization",
+    "section": "HOW TO CARAMELIZE SUGAR (wet method)",
+    "content": "1. Combine sugar and a small amount of water in a heavy saucepan\n2. Heat over medium-high without stirring until sugar dissolves\n3. Once boiling, do not stir — swirl the pan gently instead\n4. Watch color carefully: pale gold → amber → deep amber → burnt\n5. Remove from heat just before desired color — residual heat continues cooking\n6. For caramel sauce: add warm cream carefully (it will bubble violently)",
+    "chunk_id": "doc_05_caramelization__how_to_caramelize_sugar_(wet_method)"
+  },
+  {
+    "doc_id": "doc_05_caramelization",
+    "topic": "Caramelization",
+    "section": "HOW TO CARAMELIZE ONIONS",
+    "content": "1. Slice onions thinly and evenly\n2. Cook in butter or oil over medium-low heat\n3. Stir occasionally — not constantly\n4. Cook 45-60 minutes until deep golden brown and jammy\n5. Add a pinch of salt to draw out moisture\n6. Do not rush with high heat — onions will burn not caramelize",
+    "chunk_id": "doc_05_caramelization__how_to_caramelize_onions"
+  },
+  {
+    "doc_id": "doc_05_caramelization",
+    "topic": "Caramelization",
+    "section": "COMMON MISTAKES",
+    "content": "- Stirring wet caramel — causes crystallization\n- Too high heat — outside burns before inside caramelizes\n- Calling browned onions done at 10 minutes — true caramelization takes 45+ minutes",
+    "chunk_id": "doc_05_caramelization__common_mistakes"
+  },
+  {
+    "doc_id": "doc_06_maillard_reaction",
+    "topic": "Maillard Reaction",
+    "section": "MAILLARD VS CARAMELIZATION",
+    "content": "- Maillard: requires protein AND sugar — happens on meat, bread, roasted nuts\n- Caramelization: sugar only — happens in candy making, onions\n- Both produce browning but through different chemistry",
+    "chunk_id": "doc_06_maillard_reaction__maillard_vs_caramelization"
+  },
+  {
+    "doc_id": "doc_06_maillard_reaction",
+    "topic": "Maillard Reaction",
+    "section": "CONDITIONS REQUIRED",
+    "content": "- Temperature: above 280°F (140°C) — cannot occur in boiling water (max 212°F)\n- Low moisture: surface must be dry — wet surfaces steam instead of brown\n- Time: surface must stay in contact with heat long enough",
+    "chunk_id": "doc_06_maillard_reaction__conditions_required"
+  },
+  {
+    "doc_id": "doc_06_maillard_reaction",
+    "topic": "Maillard Reaction",
+    "section": "HOW TO MAXIMIZE MAILLARD REACTION",
+    "content": "1. Pat food completely dry before cooking — moisture is the enemy\n2. Preheat pan until very hot before adding food\n3. Do not overcrowd the pan — crowding creates steam\n4. Use a fat with high smoke point\n5. Do not move food too soon — let crust form before turning\n6. Season with salt after searing (salt draws moisture)",
+    "chunk_id": "doc_06_maillard_reaction__how_to_maximize_maillard_reaction"
+  },
+  {
+    "doc_id": "doc_06_maillard_reaction",
+    "topic": "Maillard Reaction",
+    "section": "FOODS WHERE MAILLARD IS CRITICAL",
+    "content": "- Steaks and burgers (crust)\n- Bread crust and toast\n- Roasted coffee and cocoa\n- Fried foods\n- Roasted vegetables",
+    "chunk_id": "doc_06_maillard_reaction__foods_where_maillard_is_critical"
+  },
+  {
+    "doc_id": "doc_07_brining",
+    "topic": "Brining",
+    "section": "WET BRINE RATIO",
+    "content": "- Basic brine: 1 cup kosher salt per 1 gallon of water\n- Sugar optional: ½ cup per gallon (promotes browning, adds subtle sweetness)\n- Add aromatics: peppercorns, bay leaves, garlic, herbs",
+    "chunk_id": "doc_07_brining__wet_brine_ratio"
+  },
+  {
+    "doc_id": "doc_07_brining",
+    "topic": "Brining",
+    "section": "WET BRINE TIMING",
+    "content": "- Chicken pieces: 1-4 hours\n- Whole chicken: 8-24 hours\n- Turkey: 12-48 hours\n- Pork chops: 1-4 hours\n- Shrimp: 15-30 minutes only — longer makes them mushy",
+    "chunk_id": "doc_07_brining__wet_brine_timing"
+  },
+  {
+    "doc_id": "doc_07_brining",
+    "topic": "Brining",
+    "section": "DRY BRINE METHOD",
+    "content": "1. Apply kosher salt generously to all surfaces (about ¾ tsp per pound)\n2. Place uncovered on a rack in the refrigerator\n3. Rest at least 1 hour, ideally overnight or up to 3 days\n4. Do not rinse before cooking — the surface should be dry",
+    "chunk_id": "doc_07_brining__dry_brine_method"
+  },
+  {
+    "doc_id": "doc_07_brining",
+    "topic": "Brining",
+    "section": "WET VS DRY BRINE",
+    "content": "- Wet brine: better moisture retention, less browning\n- Dry brine: better crust and browning, slightly less moisture\n- Dry brine preferred for poultry skin — wet brine makes skin rubbery",
+    "chunk_id": "doc_07_brining__wet_vs_dry_brine"
+  },
+  {
+    "doc_id": "doc_07_brining",
+    "topic": "Brining",
+    "section": "IMPORTANT",
+    "content": "- Do not brine kosher or pre-salted meat — it will be too salty\n- Always brine in the refrigerator — never at room temperature\n- Rinse after wet brining to remove excess surface salt",
+    "chunk_id": "doc_07_brining__important"
+  },
+  {
+    "doc_id": "doc_08_tempering_chocolate",
+    "topic": "Tempering Chocolate",
+    "section": "SIGNS OF UNTEMPERED CHOCOLATE",
+    "content": "- Dull, matte finish\n- White streaks or bloom (fat migration to surface)\n- Soft, crumbly texture\n- Does not snap cleanly",
+    "chunk_id": "doc_08_tempering_chocolate__signs_of_untempered_chocolate"
+  },
+  {
+    "doc_id": "doc_08_tempering_chocolate",
+    "topic": "Tempering Chocolate",
+    "section": "TEMPERING TEMPERATURES (dark chocolate)",
+    "content": "- Melt to: 115-120°F (46-49°C) — destroys all existing crystals\n- Cool to: 82°F (28°C) — stable Form V crystals begin to form\n- Rewarm to: 88-90°F (31-32°C) — working temperature",
+    "chunk_id": "doc_08_tempering_chocolate__tempering_temperatures_(dark_chocolate)"
+  },
+  {
+    "doc_id": "doc_08_tempering_chocolate",
+    "topic": "Tempering Chocolate",
+    "section": "MILK AND WHITE CHOCOLATE",
+    "content": "- Lower temperatures throughout (more sensitive to heat)\n- Milk chocolate working temp: 84-86°F\n- White chocolate working temp: 82-84°F",
+    "chunk_id": "doc_08_tempering_chocolate__milk_and_white_chocolate"
+  },
+  {
+    "doc_id": "doc_08_tempering_chocolate",
+    "topic": "Tempering Chocolate",
+    "section": "TABLING METHOD",
+    "content": "1. Melt chocolate to 115°F\n2. Pour 2/3 onto a marble slab\n3. Spread and work with a spatula until cooled to 82°F\n4. Return to remaining 1/3 warm chocolate\n5. Stir to reach 88-90°F working temperature",
+    "chunk_id": "doc_08_tempering_chocolate__tabling_method"
+  },
+  {
+    "doc_id": "doc_08_tempering_chocolate",
+    "topic": "Tempering Chocolate",
+    "section": "SEEDING METHOD (easier)",
+    "content": "1. Melt 2/3 of chocolate to 115°F\n2. Remove from heat\n3. Add finely chopped tempered chocolate (seeds) — 1/3 of total\n4. Stir constantly until all melted and temperature reaches 88-90°F\n\nTEST: Dip a knife tip — tempered chocolate sets in 3-5 minutes with a glossy finish.",
+    "chunk_id": "doc_08_tempering_chocolate__seeding_method_(easier)"
+  },
+  {
+    "doc_id": "doc_09_reduction",
+    "topic": "Reduction",
+    "section": "COMMON REDUCTIONS",
+    "content": "- Stock reduction → glace (stock reduced by 90%, syrupy and intensely flavored)\n- Wine reduction → base for pan sauces\n- Cream reduction → thickened cream sauce\n- Balsamic reduction → syrupy condiment\n- Tomato sauce reduction → concentrated tomato flavor",
+    "chunk_id": "doc_09_reduction__common_reductions"
+  },
+  {
+    "doc_id": "doc_09_reduction",
+    "topic": "Reduction",
+    "section": "HOW TO REDUCE",
+    "content": "1. Choose a wide, shallow pan — more surface area = faster evaporation\n2. Simmer, not boil — boiling can make sauces cloudy and bitter\n3. Skim foam and fat that rise to the surface\n4. Stir occasionally to prevent scorching\n5. Check consistency by coating the back of a spoon",
+    "chunk_id": "doc_09_reduction__how_to_reduce"
+  },
+  {
+    "doc_id": "doc_09_reduction",
+    "topic": "Reduction",
+    "section": "REDUCTION RATIOS",
+    "content": "- Reduce by half: simmer until volume is 50% of starting amount\n- Reduce by two-thirds: simmer until volume is 33% of starting amount\n- Glace: reduce stock by 90%",
+    "chunk_id": "doc_09_reduction__reduction_ratios"
+  },
+  {
+    "doc_id": "doc_09_reduction",
+    "topic": "Reduction",
+    "section": "TIPS",
+    "content": "- Season AFTER reducing — salt concentrates along with everything else\n- Start with good quality liquid — reduction amplifies both good and bad flavors\n- Use a ruler or finger to mark starting level in the pot\n- Reduction continues slightly off heat — remove before target consistency",
+    "chunk_id": "doc_09_reduction__tips"
+  },
+  {
+    "doc_id": "doc_09_reduction",
+    "topic": "Reduction",
+    "section": "PAN SAUCE METHOD",
+    "content": "1. Sear protein, remove from pan\n2. Pour off excess fat, leaving fond (browned bits)\n3. Deglaze with wine or stock\n4. Reduce by half, scraping up fond\n5. Add cream or butter, swirl to finish",
+    "chunk_id": "doc_09_reduction__pan_sauce_method"
+  },
+  {
+    "doc_id": "doc_10_poaching",
+    "topic": "Poaching",
+    "section": "PURPOSE",
+    "content": "- Cooks delicate proteins gently without toughening them\n- Keeps food moist and tender\n- Infuses subtle flavor from the poaching liquid",
+    "chunk_id": "doc_10_poaching__purpose"
+  },
+  {
+    "doc_id": "doc_10_poaching",
+    "topic": "Poaching",
+    "section": "TEMPERATURE GUIDE",
+    "content": "- Poaching: 160-180°F — small bubbles occasionally break the surface\n- Simmering: 185-200°F — steady stream of small bubbles\n- Boiling: 212°F — vigorous rolling bubbles",
+    "chunk_id": "doc_10_poaching__temperature_guide"
+  },
+  {
+    "doc_id": "doc_10_poaching",
+    "topic": "Poaching",
+    "section": "BEST FOODS FOR POACHING",
+    "content": "- Eggs (classic poached egg)\n- Fish and seafood (salmon, halibut, shrimp)\n- Chicken breast (stays moist unlike boiling)\n- Fruit (pears, peaches in spiced syrup)",
+    "chunk_id": "doc_10_poaching__best_foods_for_poaching"
+  },
+  {
+    "doc_id": "doc_10_poaching",
+    "topic": "Poaching",
+    "section": "POACHING LIQUIDS",
+    "content": "- Court bouillon: water + white wine + aromatics (for fish)\n- Chicken stock (for chicken)\n- Milk (for delicate fish)\n- Red wine + spices (for pears)\n- Plain salted water + vinegar (for eggs)",
+    "chunk_id": "doc_10_poaching__poaching_liquids"
+  },
+  {
+    "doc_id": "doc_10_poaching",
+    "topic": "Poaching",
+    "section": "HOW TO POACH EGGS",
+    "content": "1. Fill pan with 3 inches of water, add 1 tbsp white vinegar\n2. Heat to just below simmering — small bubbles on bottom\n3. Crack egg into a small cup first\n4. Create a gentle whirlpool with a spoon\n5. Slide egg into center of whirlpool\n6. Cook 3-4 minutes for set white, runny yolk\n7. Remove with slotted spoon, drain on paper towel",
+    "chunk_id": "doc_10_poaching__how_to_poach_eggs"
+  },
+  {
+    "doc_id": "doc_11_deglazing",
+    "topic": "Deglazing",
+    "section": "HOW TO DEGLAZE",
+    "content": "1. Remove food from pan — leave the fond behind\n2. Pour off excess fat if needed (leave 1-2 tbsp)\n3. With pan still hot over medium-high heat, add liquid\n4. It will sizzle and steam vigorously\n5. Use a wooden spoon or spatula to scrape up all the fond\n6. Stir until fond is fully dissolved into the liquid\n7. Reduce the liquid to concentrate flavor",
+    "chunk_id": "doc_11_deglazing__how_to_deglaze"
+  },
+  {
+    "doc_id": "doc_11_deglazing",
+    "topic": "Deglazing",
+    "section": "BEST DEGLAZING LIQUIDS",
+    "content": "- Wine (red for beef, white for chicken/fish/pork) — adds acidity and complexity\n- Stock (chicken, beef, vegetable) — adds body\n- Beer — adds malty depth (good with pork or sausage)\n- Juice (apple, orange) — adds sweetness and acidity\n- Vinegar — highly acidic, use sparingly, good for quick pan sauces\n- Water — works but adds no additional flavor",
+    "chunk_id": "doc_11_deglazing__best_deglazing_liquids"
+  },
+  {
+    "doc_id": "doc_11_deglazing",
+    "topic": "Deglazing",
+    "section": "BUILDING A PAN SAUCE AFTER DEGLAZING",
+    "content": "1. Deglaze with wine — reduce by half\n2. Add stock — reduce by half again\n3. Optional: add cream for richness\n4. Finish with cold butter (monter au beurre) — swirl in off heat for gloss and body\n5. Season with salt and pepper\n6. Strain through fine mesh sieve for elegant sauce",
+    "chunk_id": "doc_11_deglazing__building_a_pan_sauce_after_deglazing"
+  },
+  {
+    "doc_id": "doc_11_deglazing",
+    "topic": "Deglazing",
+    "section": "DO NOT",
+    "content": "- Add cold liquid to a scorching pan — risk of warping\n- Skip scraping the fond — that is where all the flavor lives\n- Over-reduce — sauce becomes too salty and intense",
+    "chunk_id": "doc_11_deglazing__do_not"
+  },
+  {
+    "doc_id": "doc_12_marinating",
+    "topic": "Marinating",
+    "section": "WHAT A MARINADE DOES",
+    "content": "- Adds flavor to the surface and slightly below\n- Acid-based marinades partially denature surface proteins (slight tenderizing)\n- Oil carries fat-soluble flavors into the food\n- Does NOT penetrate deeply — most flavor stays on the surface",
+    "chunk_id": "doc_12_marinating__what_a_marinade_does"
+  },
+  {
+    "doc_id": "doc_12_marinating",
+    "topic": "Marinating",
+    "section": "THREE COMPONENTS OF A MARINADE",
+    "content": "1. Acid (tenderizes, adds brightness): citrus juice, vinegar, wine, yogurt, buttermilk\n2. Fat (carries flavor, prevents sticking): oil\n3. Flavoring (herbs, spices, aromatics): garlic, ginger, herbs, soy sauce, chili",
+    "chunk_id": "doc_12_marinating__three_components_of_a_marinade"
+  },
+  {
+    "doc_id": "doc_12_marinating",
+    "topic": "Marinating",
+    "section": "MARINATING TIMES",
+    "content": "- Fish and seafood: 15-30 minutes only — acid \"cooks\" fish, making it mushy\n- Chicken pieces: 2-8 hours\n- Whole chicken: 8-24 hours\n- Pork: 2-12 hours\n- Beef steaks: 2-8 hours (longer can make texture mealy)\n- Beef tough cuts: up to 24 hours\n- Vegetables: 30 minutes to 2 hours\n\nDOES MARINATING TENDERIZE?\nOnly surface-level. Acid breaks down surface proteins but does not penetrate more than a few millimeters. For deep tenderizing, brining or slow cooking is more effective.",
+    "chunk_id": "doc_12_marinating__marinating_times"
+  },
+  {
+    "doc_id": "doc_12_marinating",
+    "topic": "Marinating",
+    "section": "ENZYME-BASED TENDERIZING",
+    "content": "- Pineapple contains bromelain — breaks down protein aggressively\n- Papaya contains papain — similar effect\n- Kiwi contains actinidin\n- Use sparingly and for short time — can turn meat mushy",
+    "chunk_id": "doc_12_marinating__enzyme-based_tenderizing"
+  },
+  {
+    "doc_id": "doc_12_marinating",
+    "topic": "Marinating",
+    "section": "SAFETY RULES",
+    "content": "- Always marinate in the refrigerator — never at room temperature\n- Never reuse marinade that has been in contact with raw meat as a sauce — food safety risk\n- To use as a sauce: boil the marinade for at least 1 minute first\n- Use glass, ceramic, or zip-lock bags — avoid reactive metals (aluminum) with acidic marinades",
+    "chunk_id": "doc_12_marinating__safety_rules"
+  },
+  {
+    "doc_id": "doc_13_rendering_fat",
+    "topic": "Rendering Fat",
+    "section": "COMMON RENDERED FATS",
+    "content": "- Lard: rendered pork fat — high smoke point (370°F), excellent for frying and pastry\n- Duck fat: rendered duck or goose fat — prized for roasting potatoes, confit\n- Beef tallow: rendered beef fat — very high smoke point (400°F+), used for frying\n- Schmaltz: rendered chicken fat — used in Jewish cooking for matzo balls and sautéing\n- Bacon fat: rendered as bacon cooks — flavor-packed cooking fat",
+    "chunk_id": "doc_13_rendering_fat__common_rendered_fats"
+  },
+  {
+    "doc_id": "doc_13_rendering_fat",
+    "topic": "Rendering Fat",
+    "section": "HOW TO RENDER FAT",
+    "content": "1. Cut fat into small, uniform pieces (smaller = faster rendering)\n2. Place in heavy pot or pan with a splash of water (prevents scorching at start)\n3. Cook over low heat — patience is essential\n4. Fat will melt slowly, releasing liquid fat\n5. Connective tissue (cracklings) will brown and crisp up\n6. Strain through fine mesh sieve or cheesecloth\n7. Cool and store in sealed container in refrigerator (months) or freezer (years)",
+    "chunk_id": "doc_13_rendering_fat__how_to_render_fat"
+  },
+  {
+    "doc_id": "doc_13_rendering_fat",
+    "topic": "Rendering Fat",
+    "section": "WET VS DRY RENDERING",
+    "content": "- Wet: start with a little water — gentler, lighter colored fat, less flavor\n- Dry: no water — more flavorful, slightly darker fat, more attention needed",
+    "chunk_id": "doc_13_rendering_fat__wet_vs_dry_rendering"
+  },
+  {
+    "doc_id": "doc_13_rendering_fat",
+    "topic": "Rendering Fat",
+    "section": "SMOKE POINTS OF RENDERED FATS",
+    "content": "- Chicken schmaltz: 375°F\n- Lard: 370°F\n- Duck fat: 375°F\n- Beef tallow: 400°F+",
+    "chunk_id": "doc_13_rendering_fat__smoke_points_of_rendered_fats"
+  },
+  {
+    "doc_id": "doc_13_rendering_fat",
+    "topic": "Rendering Fat",
+    "section": "WHY RENDERED FAT IS VALUED",
+    "content": "- High smoke points for frying\n- Rich, savory flavor that vegetable oils lack\n- Long shelf life when properly stored\n- Traditional use in pastry (lard makes the flakiest pie crust)",
+    "chunk_id": "doc_13_rendering_fat__why_rendered_fat_is_valued"
+  },
+  {
+    "doc_id": "doc_14_blooming_spices",
+    "topic": "Blooming Spices",
+    "section": "1. BLOOMING IN FAT (most common)",
+    "content": "- Heat oil, ghee, or butter in a pan over medium heat\n- Add whole spices first (mustard seeds, cumin seeds, cardamom pods)\n- Cook until they sizzle, pop, and become fragrant — 30-60 seconds\n- Add ground spices next — cook 30-60 seconds more, stirring constantly\n- Add onions or other aromatics immediately — prevents burning",
+    "chunk_id": "doc_14_blooming_spices__1._blooming_in_fat_(most_common)"
+  },
+  {
+    "doc_id": "doc_14_blooming_spices",
+    "topic": "Blooming Spices",
+    "section": "2. DRY TOASTING",
+    "content": "- Place whole spices in a dry pan over medium heat\n- Stir constantly until fragrant — 2-3 minutes\n- Remove immediately — spices continue cooking from residual heat\n- Cool before grinding in spice grinder or mortar and pestle",
+    "chunk_id": "doc_14_blooming_spices__2._dry_toasting"
+  },
+  {
+    "doc_id": "doc_14_blooming_spices",
+    "topic": "Blooming Spices",
+    "section": "SIGNS SPICES ARE BLOOMED PROPERLY",
+    "content": "- Whole seeds pop and sizzle in oil\n- Aroma fills the kitchen — raw spice smell becomes warm and complex\n- Mustard seeds turn grey and pop\n- Cumin seeds darken slightly and smell nutty",
+    "chunk_id": "doc_14_blooming_spices__signs_spices_are_bloomed_properly"
+  },
+  {
+    "doc_id": "doc_14_blooming_spices",
+    "topic": "Blooming Spices",
+    "section": "COMMON MISTAKES",
+    "content": "- Heat too high — spices burn in seconds, turning bitter\n- Skipping blooming — spices taste raw and flat\n- Adding ground spices without fat — they scorch on dry pan surface\n- Blooming too long — burnt spices are irreversible, must start over",
+    "chunk_id": "doc_14_blooming_spices__common_mistakes"
+  },
+  {
+    "doc_id": "doc_14_blooming_spices",
+    "topic": "Blooming Spices",
+    "section": "CUISINES THAT RELY ON BLOOMING",
+    "content": "- Indian cooking: tadka/tarka (spices bloomed in ghee added at end of cooking)\n- Mexican cooking: toasting dried chiles and spices\n- Middle Eastern cooking: baharat and other spice blends bloomed in oil",
+    "chunk_id": "doc_14_blooming_spices__cuisines_that_rely_on_blooming"
+  },
+  {
+    "doc_id": "doc_15_resting_meat",
+    "topic": "Resting Meat",
+    "section": "WHAT HAPPENS DURING RESTING",
+    "content": "- Muscle fibers relax and expand\n- Moisture redistributes from center to edges\n- Internal temperature equalizes (carryover cooking continues)\n- Result: juicier, more evenly cooked meat",
+    "chunk_id": "doc_15_resting_meat__what_happens_during_resting"
+  },
+  {
+    "doc_id": "doc_15_resting_meat",
+    "topic": "Resting Meat",
+    "section": "CARRYOVER COOKING",
+    "content": "Meat continues cooking after being removed from heat. Internal temperature rises:\n- Small cuts (steak, chops): 3-5°F rise\n- Medium roasts: 5-10°F rise\n- Large roasts (turkey, prime rib): 10-15°F rise\nRemove meat from heat before reaching target temperature to account for this.",
+    "chunk_id": "doc_15_resting_meat__carryover_cooking"
+  },
+  {
+    "doc_id": "doc_15_resting_meat",
+    "topic": "Resting Meat",
+    "section": "RESTING TIMES",
+    "content": "- Thin steaks (under 1 inch): 5 minutes\n- Thick steaks (1+ inch): 8-10 minutes\n- Pork chops: 5 minutes\n- Chicken pieces: 5 minutes\n- Whole chicken: 15-20 minutes\n- Large roasts (beef, pork): 20-30 minutes\n- Whole turkey: 30-45 minutes",
+    "chunk_id": "doc_15_resting_meat__resting_times"
+  },
+  {
+    "doc_id": "doc_15_resting_meat",
+    "topic": "Resting Meat",
+    "section": "HOW TO REST PROPERLY",
+    "content": "- Place on a cutting board or warm plate\n- Tent loosely with foil — do not wrap tightly (traps steam, softens crust)\n- Keep in a warm area — not back in the oven\n- Do not skip resting to serve hot — a few minutes makes a significant difference",
+    "chunk_id": "doc_15_resting_meat__how_to_rest_properly"
+  },
+  {
+    "doc_id": "doc_16_folding",
+    "topic": "Folding vs Stirring",
+    "section": "HOW TO FOLD PROPERLY",
+    "content": "1. Add lighter mixture on top of heavier mixture\n2. Use a large rubber spatula\n3. Cut down through the center of the bowl to the bottom\n4. Sweep along the bottom and up the side\n5. Rotate the bowl slightly\n6. Repeat — each fold incorporates mixture gently\n7. Stop as soon as just combined — streaks are acceptable\n8. Do not overfold — deflates and toughens",
+    "chunk_id": "doc_16_folding__how_to_fold_properly"
+  },
+  {
+    "doc_id": "doc_16_folding",
+    "topic": "Folding vs Stirring",
+    "section": "WHEN TO FOLD VS STIR",
+    "content": "- FOLD: soufflés, mousse, chiffon cake, angel food cake, macarons, cheesecake with whipped cream\n- STIR: anything where air incorporation is not critical — sauces, batters where gluten development is desired",
+    "chunk_id": "doc_16_folding__when_to_fold_vs_stir"
+  },
+  {
+    "doc_id": "doc_16_folding",
+    "topic": "Folding vs Stirring",
+    "section": "FOLDING BEATEN EGG WHITES",
+    "content": "- Add 1/3 of whites to base mixture first — stir this in (lightens the base)\n- Add remaining whites in two additions — fold gently\n- A few white streaks remaining are fine — overmixing is worse",
+    "chunk_id": "doc_16_folding__folding_beaten_egg_whites"
+  },
+  {
+    "doc_id": "doc_16_folding",
+    "topic": "Folding vs Stirring",
+    "section": "COMMON MISTAKES",
+    "content": "- Using a whisk instead of spatula — too aggressive\n- Stirring in circles — breaks bubbles and develops gluten\n- Adding all whites at once — too heavy to fold gently\n- Overfolding until perfectly smooth — mixture deflates",
+    "chunk_id": "doc_16_folding__common_mistakes"
+  },
+  {
+    "doc_id": "doc_17_seasoning_cast_iron",
+    "topic": "Seasoning Cast Iron",
+    "section": "INITIAL SEASONING (new or stripped pan)",
+    "content": "1. Wash pan with soap and hot water — only time soap is acceptable\n2. Dry completely — heat on stove for 2 minutes to evaporate all moisture\n3. Apply a very thin layer of oil (flaxseed, vegetable, or shortening) to entire surface including outside and handle\n4. Wipe off almost all the oil — it should look nearly dry (thick layers gum up)\n5. Place upside down in oven at 450-500°F\n6. Bake for 1 hour\n7. Turn off oven, let pan cool inside\n8. Repeat 3-6 times for a good base layer",
+    "chunk_id": "doc_17_seasoning_cast_iron__initial_seasoning_(new_or_stripped_pan)"
+  },
+  {
+    "doc_id": "doc_17_seasoning_cast_iron",
+    "topic": "Seasoning Cast Iron",
+    "section": "BEST OILS FOR SEASONING",
+    "content": "- Flaxseed oil: creates hard, durable seasoning (but can flake)\n- Crisco/vegetable shortening: traditional, reliable\n- Vegetable or canola oil: widely used, good results\n- Avoid: olive oil (low smoke point), butter (burns)",
+    "chunk_id": "doc_17_seasoning_cast_iron__best_oils_for_seasoning"
+  },
+  {
+    "doc_id": "doc_17_seasoning_cast_iron",
+    "topic": "Seasoning Cast Iron",
+    "section": "ONGOING CARE",
+    "content": "- Clean with hot water and a stiff brush — avoid soap after seasoning\n- Dry immediately and thoroughly — cast iron rusts fast\n- Apply a thin oil wipe after each use while still warm\n- Cook fatty foods (bacon, sausage) to build seasoning naturally",
+    "chunk_id": "doc_17_seasoning_cast_iron__ongoing_care"
+  },
+  {
+    "doc_id": "doc_17_seasoning_cast_iron",
+    "topic": "Seasoning Cast Iron",
+    "section": "WHAT DAMAGES SEASONING",
+    "content": "- Soaking in water or dishwasher\n- Cooking highly acidic foods (tomatoes, citrus) for long periods\n- Metal scourers or steel wool\n- Leaving wet or damp",
+    "chunk_id": "doc_17_seasoning_cast_iron__what_damages_seasoning"
+  },
+  {
+    "doc_id": "doc_17_seasoning_cast_iron",
+    "topic": "Seasoning Cast Iron",
+    "section": "RESTORING RUSTY CAST IRON",
+    "content": "1. Scrub with steel wool until rust is gone\n2. Wash, dry completely\n3. Re-season from scratch following initial seasoning steps",
+    "chunk_id": "doc_17_seasoning_cast_iron__restoring_rusty_cast_iron"
+  },
+  {
+    "doc_id": "doc_18_making_roux",
+    "topic": "Making a Roux",
+    "section": "RATIO",
+    "content": "- Equal parts fat and flour by weight\n- Example: 2 tbsp butter + 2 tbsp flour thickens 1 cup of liquid to medium consistency",
+    "chunk_id": "doc_18_making_roux__ratio"
+  },
+  {
+    "doc_id": "doc_18_making_roux",
+    "topic": "Making a Roux",
+    "section": "TYPES OF ROUX BY COLOR",
+    "content": "1. White roux: cooked 2-3 minutes, pale color, maximum thickening power — used in béchamel\n2. Blonde roux: cooked 5-7 minutes, golden color, slightly nutty — used in velouté\n3. Brown roux: cooked 15-20 minutes, medium brown, rich flavor — used in espagnole\n4. Dark roux: cooked 30-45 minutes, very dark, deep flavor, minimal thickening — used in Cajun gumbo",
+    "chunk_id": "doc_18_making_roux__types_of_roux_by_color"
+  },
+  {
+    "doc_id": "doc_18_making_roux",
+    "topic": "Making a Roux",
+    "section": "HOW TO MAKE A ROUX",
+    "content": "1. Melt fat (butter, oil, or lard) in heavy saucepan over medium heat\n2. Add flour all at once\n3. Stir constantly with a wooden spoon or whisk\n4. Cook to desired color, stirring continuously — do not let it sit\n5. Add liquid (warm or hot) gradually while whisking constantly\n6. Bring to a simmer, whisking until smooth and thickened",
+    "chunk_id": "doc_18_making_roux__how_to_make_a_roux"
+  },
+  {
+    "doc_id": "doc_18_making_roux",
+    "topic": "Making a Roux",
+    "section": "ADDING LIQUID",
+    "content": "- Add warm or hot liquid — cold liquid causes lumps\n- Add gradually in stages — not all at once\n- Whisk constantly while adding\n- Bring to a simmer to fully activate thickening",
+    "chunk_id": "doc_18_making_roux__adding_liquid"
+  },
+  {
+    "doc_id": "doc_18_making_roux",
+    "topic": "Making a Roux",
+    "section": "COMMON MISTAKES",
+    "content": "- Unequal parts fat and flour — grainy or greasy sauce\n- Adding cold liquid — causes lumps that are hard to remove\n- Not cooking long enough — raw flour taste remains\n- Stopping stirring — burns on the bottom",
+    "chunk_id": "doc_18_making_roux__common_mistakes"
+  },
+  {
+    "doc_id": "doc_18_making_roux",
+    "topic": "Making a Roux",
+    "section": "FAT OPTIONS",
+    "content": "- Butter: classic, rich flavor (clarified butter for dark roux — regular butter burns)\n- Vegetable oil: neutral, good for dark roux\n- Lard or duck fat: traditional in regional cooking",
+    "chunk_id": "doc_18_making_roux__fat_options"
+  },
+  {
+    "doc_id": "doc_19_steaming",
+    "topic": "Steaming",
+    "section": "PURPOSE",
+    "content": "- Preserves nutrients better than boiling (water-soluble vitamins do not leach out)\n- Retains natural color, flavor, and texture of vegetables\n- Cooks delicate foods gently without agitation\n- Fat-free cooking method",
+    "chunk_id": "doc_19_steaming__purpose"
+  },
+  {
+    "doc_id": "doc_19_steaming",
+    "topic": "Steaming",
+    "section": "STEAMING EQUIPMENT",
+    "content": "- Bamboo steamer: traditional, stacks multiple tiers, absorbs excess moisture\n- Metal steamer basket: fits inside a pot, adjustable\n- Steamer insert: pot with perforated insert\n- Improvised: colander over a pot of boiling water, covered with a lid\n- Electric steamer: countertop appliance",
+    "chunk_id": "doc_19_steaming__steaming_equipment"
+  },
+  {
+    "doc_id": "doc_19_steaming",
+    "topic": "Steaming",
+    "section": "HOW TO STEAM",
+    "content": "1. Add 1-2 inches of water to pot — water should not touch the steamer basket\n2. Bring water to a boil\n3. Place food in steamer basket in a single layer if possible\n4. Cover tightly — steam must not escape\n5. Cook to desired doneness\n6. Check water level for long cooking — refill with boiling water if needed",
+    "chunk_id": "doc_19_steaming__how_to_steam"
+  },
+  {
+    "doc_id": "doc_19_steaming",
+    "topic": "Steaming",
+    "section": "STEAMING TIMES",
+    "content": "- Broccoli florets: 5-6 minutes\n- Green beans: 4-5 minutes\n- Asparagus: 4-5 minutes\n- Fish fillet (1 inch thick): 8-10 minutes\n- Chicken breast: 15-20 minutes\n- Dumplings: 8-10 minutes\n- Rice (in bamboo steamer): 20-25 minutes after soaking",
+    "chunk_id": "doc_19_steaming__steaming_times"
+  },
+  {
+    "doc_id": "doc_19_steaming",
+    "topic": "Steaming",
+    "section": "STEAMING VS BOILING",
+    "content": "- Steaming: food above water, nutrients stay in food, gentler\n- Boiling: food submerged, some nutrients leach into water, more agitation",
+    "chunk_id": "doc_19_steaming__steaming_vs_boiling"
+  },
+  {
+    "doc_id": "doc_19_steaming",
+    "topic": "Steaming",
+    "section": "FLAVOR ENHANCEMENT",
+    "content": "- Add aromatics to the water: ginger, lemongrass, wine, herbs\n- Steam will carry subtle flavor into the food\n- Place aromatics directly under or around food in the basket",
+    "chunk_id": "doc_19_steaming__flavor_enhancement"
+  },
+  {
+    "doc_id": "doc_20_knife_skills",
+    "topic": "Knife Skills — Basic Cuts",
+    "section": "BASIC CUTS (from largest to smallest)",
+    "content": "1. LARGE DICE: ¾ inch cubes\n   - For stews, soups, roasted vegetables\n\n2. MEDIUM DICE: ½ inch cubes\n   - Most common dice, salads, salsas\n\n3. SMALL DICE: ¼ inch cubes\n   - Mirepoix, finely diced vegetables for quick cooking\n\n4. BRUNOISE: ⅛ inch cubes (very fine dice)\n   - Garnishes, fine sauces, elegant presentations\n\n5. JULIENNE: thin matchsticks, ⅛ inch × ⅛ inch × 2-3 inches\n   - Stir-fries, salads, garnishes\n\n6. CHIFFONADE: thin ribbons of leafy herbs or greens\n   - Stack leaves, roll tightly, slice thinly across the roll\n   - Used for basil, mint, spinach\n\n7. MINCE: very finely chopped, irregular, smaller than brunoise\n   - Garlic, shallots, herbs",
+    "chunk_id": "doc_20_knife_skills__basic_cuts_(from_largest_to_smallest)"
+  },
+  {
+    "doc_id": "doc_20_knife_skills",
+    "topic": "Knife Skills — Basic Cuts",
+    "section": "HOW TO JULIENNE",
+    "content": "1. Square off the vegetable — cut flat sides on all 4 sides\n2. Slice into planks of desired thickness (⅛ inch)\n3. Stack planks\n4. Cut planks into sticks of same width",
+    "chunk_id": "doc_20_knife_skills__how_to_julienne"
+  },
+  {
+    "doc_id": "doc_20_knife_skills",
+    "topic": "Knife Skills — Basic Cuts",
+    "section": "HOW TO DICE (from julienne)",
+    "content": "1. Complete julienne cuts\n2. Line up sticks\n3. Cut across the sticks at the same interval as the stick width\n4. Result: uniform cubes",
+    "chunk_id": "doc_20_knife_skills__how_to_dice_(from_julienne)"
+  },
+  {
+    "doc_id": "doc_20_knife_skills",
+    "topic": "Knife Skills — Basic Cuts",
+    "section": "KNIFE MAINTENANCE",
+    "content": "- Hone with a honing steel before each use — realigns the edge\n- Sharpen with a whetstone every few months — removes metal to create a new edge\n- A sharp knife is safer than a dull one — requires less force\n- Wash by hand and dry immediately — dishwashers dull and damage blades",
+    "chunk_id": "doc_20_knife_skills__knife_maintenance"
+  },
+  {
+    "doc_id": "doc_20_knife_skills",
+    "topic": "Knife Skills — Basic Cuts",
+    "section": "BOARD SAFETY",
+    "content": "- Place a damp towel under the cutting board to prevent sliding\n- Use a board large enough — crowded boards cause accidents",
+    "chunk_id": "doc_20_knife_skills__board_safety"
+  }
+]
