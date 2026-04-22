@@ -157,6 +157,42 @@ ChromaDB measures the angle between the query vector and every stored chunk vect
 
 ---
 
+### Why you cannot trace where 0.23 came from
+
+A common question: *"how did the model come up with 0.23 for the word 'how'?"*
+
+The honest answer: **you cannot trace it back.** Here's why:
+
+`all-MiniLM-L6-v2` has 22 million parameters (weights) learned during training on 1 billion+ sentence pairs. When text goes in:
+
+```
+"how long to blanch green beans"
+  → vocabulary lookup → initial vector
+  → passed through 6 transformer layers
+  → each layer applies matrix multiplications using 22M weights
+  → output: 384 numbers including 0.23
+```
+
+The 0.23 is the result of millions of multiplications and additions. There is no human-readable explanation for why it is specifically 0.23.
+
+**"how" alone means nothing — context changes everything:**
+```
+"how long to blanch green beans" → [0.23, -0.87, 0.45, ...]
+"how to temper chocolate"        → [0.31, -0.12, 0.78, ...]
+```
+Same word "how", different sentence, different vector. The model reads the whole sentence together — not word by word.
+
+**The 384 dimensions are not interpretable individually.**
+No one knows what each dimension represents — not even the researchers who built the model. What matters is the pattern across all 384 numbers together. Two sentences with similar meaning end up with similar patterns.
+
+**Analogy — GPS coordinates:**
+- New York: 40.71°N, 74.00°W
+- Boston: 42.36°N, 71.06°W
+
+You cannot explain why New York's latitude is exactly 40.71 — it just is, based on the coordinate system. But you can tell New York and Boston are closer to each other than New York and Tokyo. Vectors work the same way — individual numbers are not meaningful, the **distance between vectors** is what matters for search.
+
+---
+
 ## Embedding Model — all-MiniLM-L6-v2
 
 | Property | Value |
