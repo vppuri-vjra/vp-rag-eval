@@ -272,6 +272,68 @@ ChromaDB does not know our ground truth. It just finds the closest vectors.
 
 ---
 
+## Claude as Answerer vs Claude as Judge
+
+In this eval, Claude plays two completely different roles across two separate steps. Same model — different prompt, different job.
+
+### Role 1 — Answerer (Step 6)
+
+Claude is the system being evaluated.
+
+```
+Prompt says:
+"Answer the question using ONLY the information provided below.
+Do not use outside knowledge."
+
+Input:  question + retrieved chunks
+Output: an answer
+```
+
+Claude's job: *produce an answer grounded in the retrieved content.*
+
+---
+
+### Role 2 — Judge (Step 8)
+
+Claude is the evaluator reviewing the system's output.
+
+```
+Prompt says:
+"You are an expert evaluator reviewing answers produced by a RAG system.
+Your job is to evaluate the answer on three criteria."
+
+Input:  question + retrieved chunks + the answer Claude gave in Step 6
+Output: CORRECT / COMPLETE / GROUNDED scores + VERDICT + REASON
+```
+
+Claude's job: *score someone else's answer against the source material.*
+
+---
+
+### Why this works — Claude has no memory
+
+Each API call is completely independent. Claude does not remember what it said in Step 6. When it receives the Step 8 judge prompt, it has no idea it was the one who generated the answer. It just reads the prompt and plays the role defined there.
+
+**The prompt IS the role.** Change the prompt → change the behavior.
+
+| | Step 6 — Answerer | Step 8 — Judge |
+|---|---|---|
+| Claude's role | Generate an answer | Score an answer |
+| Input | Question + chunks | Question + chunks + answer |
+| Output | Answer text | PASS/FAIL scores + reasoning |
+| What it doesn't know | Nothing hidden | It was the one who wrote the answer |
+| Defined by | `GROUNDED_PROMPT` in rag_pipeline.py | `judge_prompt.txt` in prompts/ |
+
+### Why use the same model for both roles
+
+- Consistency — same capability level evaluating its own tier of output
+- Cost — no need to spin up a separate evaluation model
+- Precedent — this is the standard LLM-as-judge pattern used in production evals
+
+The risk: a model may be biased toward its own style of answers. In production you would validate LLM-judge scores against human labels to check for this bias. That is Step 10 in our eval.
+
+---
+
 ## Retrieval Eval — Step 7 Results
 
 **Script:** `scripts/retrieval_eval.py`

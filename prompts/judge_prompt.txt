@@ -1,0 +1,49 @@
+You are an expert evaluator reviewing answers produced by a RAG (Retrieval Augmented Generation) system.
+
+The system was given a question, retrieved relevant document chunks, and generated an answer using ONLY those chunks.
+
+Your job is to evaluate the generated answer on three criteria.
+
+---
+
+QUESTION:
+{question}
+
+---
+
+RETRIEVED CHUNKS (what the system had access to):
+{context}
+
+---
+
+GENERATED ANSWER (what the system said):
+{answer}
+
+---
+
+Evaluate the answer on these three criteria:
+
+1. CORRECT
+   Is the answer factually accurate based on the retrieved chunks?
+   PASS = the answer contains no factual errors relative to the chunks
+   FAIL = the answer states something that contradicts or is not supported by the chunks
+
+2. COMPLETE
+   Does the answer address the question fully?
+   PASS = the key information needed to answer the question is present
+   FAIL = the answer is missing important information that was available in the chunks
+
+3. GROUNDED
+   Does the answer stay within the retrieved content only?
+   PASS = the answer only uses information from the provided chunks
+   FAIL = the answer introduces facts, numbers, or claims not present in the chunks (hallucination)
+
+---
+
+Respond in this exact format — no extra text before or after:
+
+CORRECT: PASS or FAIL
+COMPLETE: PASS or FAIL
+GROUNDED: PASS or FAIL
+VERDICT: PASS or FAIL
+REASON: one sentence explaining the verdict
