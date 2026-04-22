@@ -1,0 +1,34 @@
+TOPIC: Maillard Reaction
+
+The Maillard reaction is a chemical reaction between amino acids (proteins) and reducing sugars that produces the brown color and complex flavors associated with cooked food. Named after French chemist Louis-Camille Maillard who described it in 1912.
+
+HOW IT WORKS:
+At temperatures above 280°F (140°C), amino acids and sugars react to form hundreds of new flavor and aroma compounds. The reaction produces melanoidins — brown-colored polymers responsible for the crust on bread, the sear on steak, and the color of roasted coffee.
+
+MAILLARD VS CARAMELIZATION:
+- Maillard: requires protein AND sugar — happens on meat, bread, roasted nuts
+- Caramelization: sugar only — happens in candy making, onions
+- Both produce browning but through different chemistry
+
+CONDITIONS REQUIRED:
+- Temperature: above 280°F (140°C) — cannot occur in boiling water (max 212°F)
+- Low moisture: surface must be dry — wet surfaces steam instead of brown
+- Time: surface must stay in contact with heat long enough
+
+HOW TO MAXIMIZE MAILLARD REACTION:
+1. Pat food completely dry before cooking — moisture is the enemy
+2. Preheat pan until very hot before adding food
+3. Do not overcrowd the pan — crowding creates steam
+4. Use a fat with high smoke point
+5. Do not move food too soon — let crust form before turning
+6. Season with salt after searing (salt draws moisture)
+
+FOODS WHERE MAILLARD IS CRITICAL:
+- Steaks and burgers (crust)
+- Bread crust and toast
+- Roasted coffee and cocoa
+- Fried foods
+- Roasted vegetables
+
+WHY BOILING OR STEAMING CANNOT BROWN FOOD:
+Water boils at 212°F — far below the 280°F needed for Maillard. This is why boiled chicken looks grey and roasted chicken looks brown.
