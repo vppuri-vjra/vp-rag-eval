@@ -411,14 +411,39 @@ This is the most important finding of the eval. Even the 3 questions where retri
 | Hard | 4 | 4 | 100% |
 | **OVERALL** | **20** | **20** | **100%** |
 
+### Full results — Question + Answerer + Judge
+
+| Q | Diff | Question | Retrieval | Answerer Response (summary) | Faithful | Judge Reason |
+|---|---|---|---|---|---|---|
+| 1 | easy | How long should I blanch green beans? | ✅ | Blanch green beans for **2-3 minutes** | ✅ | Correctly states 2-3 min, matches Source 1 exactly |
+| 2 | medium | Why does overcrowding a pan prevent browning when sautéing? | ✅ | Food **steams instead of browns**; noted chunks don't explain the mechanism | ✅ | Correctly identifies steaming outcome, acknowledges limitation, no hallucination |
+| 3 | medium | What ingredient in egg yolks makes mayonnaise stable? | ✅ | **Lecithin** in egg yolks stabilises mayonnaise | ✅ | Correctly identifies lecithin from Source 1, no extra claims |
+| 4 | easy | What cuts of beef work best for braising? | ✅ | **Short ribs and brisket** — collagen-rich, tenderised by slow cooking | ✅ | Correct cuts and explanation, stays within chunks |
+| 5 | easy | How do I caramelize onions properly and how long does it take? | ✅ | Medium-low heat, stir occasionally, **45-60 minutes**, don't rush | ✅ | All info from chunks, no outside knowledge added |
+| 6 | hard | Why can't you brown meat by boiling it? | ✅ | Maillard reaction needs **>280°F and dry surface**; boiling = 212°F max + wet | ✅ | Both temperature and moisture conditions correct per Source 1 |
+| 7 | easy | What is the salt to water ratio for a basic wet brine? | ✅ | **1 cup kosher salt per 1 gallon of water** | ✅ | Direct match to Source 1, no extras |
+| 8 | medium | How do I test if chocolate is properly tempered? | ✅ | Dip knife tip — sets in **3-5 minutes** with **glossy finish** | ✅ | Exact extraction from Source 1 |
+| 9 | medium | How do I build a pan sauce after searing meat? | ❌ | Partial answer from deglazing chunks (what to avoid) + noted full steps not available | ✅ | Used what was available, correctly flagged limitation — no hallucination |
+| 10 | hard | Why does vinegar help when poaching eggs? | ✅ | **"I cannot answer this"** — chunks mention vinegar but don't explain why | ✅ | Correct refusal — chunks had the fact but not the explanation |
+| 11 | medium | What is fond and why is it important for flavor? | ❌ | **Fond = browned bits** on pan bottom, used for building sauces; noted detail not in chunks | ✅ | Correct partial definition from sautéing chunk, acknowledged limitation |
+| 12 | easy | How long should I marinate fish or seafood? | ✅ | **15-30 minutes only** — acid "cooks" fish, makes it mushy longer | ✅ | Time and reason both from chunks |
+| 13 | medium | What is the difference between wet and dry rendering fat? | ✅ | Wet = water, lighter colour, less flavour. Dry = no water, more flavour, darker | ✅ | Complete and accurate summary of Source 1 |
+| 14 | medium | What happens if I burn spices while blooming them? | ✅ | Turn **bitter**, result is **irreversible** — must start over | ✅ | Direct match to Source 1 |
+| 15 | hard | How much does internal temperature rise after removing meat from heat? | ✅ | Small cuts **3-5°F**, medium roasts **5-10°F**, large roasts **10-15°F** | ✅ | All three ranges reproduced accurately |
+| 16 | medium | Why should I use a spatula instead of a whisk when folding egg whites? | ✅ | Whisk is **"too aggressive"** and **breaks bubbles** | ✅ | Correct, grounded in Source 1 |
+| 17 | easy | How do I restore a rusty cast iron pan? | ✅ | Scrub with steel wool → wash → dry → re-season (full 8-step process) | ✅ | Combines two chunks correctly, stays within retrieved content |
+| 18 | medium | What happens if I add cold liquid to a roux? | ✅ | **Causes lumps** — add warm or hot liquid instead | ✅ | Direct citation from Source 1 |
+| 19 | hard | How do aromatics added to steaming water affect the food? | ✅ | Steam carries **subtle flavour** into food; place aromatics under/around basket | ✅ | Accurate extraction from Source 2 |
+| 20 | easy | What is the claw grip and why is it important? | ❌ | **"I cannot answer this"** — retrieved chunks had no relevant content | ✅ | Correct refusal — grounding constraint prevented hallucination |
+
 ### Cross-tab — Retrieval × Faithfulness
 
 | Retrieval | Faithfulness | Count | What it means |
 |---|---|---|---|
 | ✅ PASS | ✅ PASS | 17 | Right doc found, answered correctly from it |
-| ❌ FAIL | ✅ PASS | 3 | Wrong doc found — but Claude stayed grounded (safe refusal or partial answer) |
-| ✅ PASS | ❌ FAIL | 0 | Right doc found but Claude hallucinated — did not happen |
-| ❌ FAIL | ❌ FAIL | 0 | Wrong doc + hallucination — worst case — did not happen |
+| ❌ FAIL | ✅ PASS | 3 | Wrong doc found — Claude stayed grounded (partial answer or safe refusal) |
+| ✅ PASS | ❌ FAIL | 0 | Right doc found but Claude hallucinated — **did not happen** |
+| ❌ FAIL | ❌ FAIL | 0 | Wrong doc + hallucination — worst case — **did not happen** |
 
 ### Key insight — the grounding constraint eliminated hallucination
 
