@@ -1044,3 +1044,70 @@ Each step is a **Runnable** — they all share the same interface (`.invoke()`, 
 
 ### Script
 `scripts/langchain_pipeline.py` — 200 lines including full inline comments explaining each LangChain abstraction.
+
+---
+
+## LangChain — When to Use It (and When Not To)
+
+### The honest answer
+For a single script, one model, one retrieval source — you don't need LangChain. Raw SDK is simpler. We used it to learn the abstractions, which is valid.
+
+### When LangChain pays off
+
+| Situation | Why LangChain helps |
+|---|---|
+| **Swapping models frequently** | Change `ChatAnthropic` to `ChatOpenAI` in one line — chain stays the same |
+| **Multiple retrieval sources** | Router chains: orders → SQL DB, docs → ChromaDB, news → web search |
+| **Chat memory** | `ConversationBufferMemory` handles message history automatically |
+| **Agents with tools** | Agent loop (decide → act → observe) is built in |
+| **Team / production** | Standard conventions everyone knows; LangSmith for observability |
+
+### When you don't need it
+
+| Situation | Use |
+|---|---|
+| Single script, one model, learning | Raw SDK |
+| Prototype, quick experiment | Raw SDK |
+| Production app, multiple sources, team | LangChain |
+| Complex agents, memory, routing | LangChain / LangGraph |
+
+### The interview answer
+*"I rebuilt the same pipeline in LangChain to learn the framework. In production, I'd use it when the pipeline has multiple retrieval sources, needs memory, or the team needs a standard structure."*
+
+That answer is stronger than just "I used LangChain" — it shows you understand *when* to use a tool, not just *how*.
+
+---
+
+## LangSmith — Observability for LangChain Pipelines
+
+LangSmith records every step of every chain run. When `rag_chain.invoke(question)` returns a wrong answer, LangSmith tells you *which step* failed.
+
+### What it captures per run
+
+| What | Example |
+|---|---|
+| Input to each step | Raw question sent to retriever |
+| Output of each step | Which 3 chunks came back, with scores |
+| Prompt sent to LLM | Full filled-in template Claude received |
+| LLM response | Claude's exact answer |
+| Latency per step | Retriever: 43ms, LLM: 1.2s |
+| Token count + cost | 847 input tokens, $0.003 |
+| Errors | Which step failed and why |
+
+### Without vs With LangSmith
+
+| | Without LangSmith | With LangSmith |
+|---|---|---|
+| Wrong answer arrives | You only see the final output | Click the trace — see every step |
+| Debug question | Did retrieval fail or generation fail? | Immediately know: wrong chunk retrieved |
+| Cost tracking | Manual calculation | Automatic per run, per step |
+| Team visibility | Each dev runs locally | Shared dashboard, everyone sees same traces |
+
+### Relationship to LangChain
+
+```
+LangChain   =   the pipeline
+LangSmith   =   the debugger + dashboard for that pipeline
+```
+
+LangSmith is separate — you can use LangChain without it. But in production, LangSmith is how teams catch regressions, monitor cost, and debug failures at scale.
