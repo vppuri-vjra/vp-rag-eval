@@ -192,8 +192,8 @@ Storing whole documents in a vector database causes:
 | 6a | Swap Embedding Model | **384 dims**, retrieval accuracy **85%** (17/20) | Replace all-MiniLM-L6-v2 with BGE-large (**1024 dims**), rebuild index, re-run 20 questions | More dimensions = richer vector = better at separating similar concepts. 85% → 95%. Q11 and Q20 fixed | ✅ Done |
 | 6b | RAG Pattern — HyDE | **1024 dims**, retrieval accuracy **95%** (19/20), Q9 still failing | Ask Claude to write a hypothetical answer first, embed that (**1024 dims**) as the search query instead of the question | Question and document live in different vector spaces — hypothesis bridges the gap. 95% → 100%. Q9 fixed | ✅ Done |
 | 6c | RAG Pattern — Re-ranking | **100%** with HyDE — testing a different pattern on BGE baseline (95%) | Retrieve top-10 with BGE-large (**1024 dim** vectors), re-score all 10 with cross-encoder, keep top-3 | Cross-encoder reads both texts together — no fixed dims. More stages ≠ better. Went to 90% (-5%) | ✅ Done |
-| 6d | RAG Pattern — Branched RAG | Single retrieval path | Run multiple retrieval strategies in parallel, merge and deduplicate results | When one retrieval path isn't enough — combine vector + keyword + other signals | ⬅️ Next |
-| 6e | RAG Pattern — Agentic RAG | Fixed pipeline — always retrieves, always same way | Let an agent decide whether to retrieve, what to retrieve, and how many times | Moving from fixed pipeline to dynamic decision-making | — |
+| 6d | RAG Pattern — Branched RAG | Single retrieval path | Vector (BGE, 1024d) + BM25 in parallel, merge via RRF → top-3 | No single path covers everything — BM25 fixes exact terms, vector fixes meaning. Held at 95% | ✅ Done |
+| 6e | RAG Pattern — Agentic RAG | Fixed pipeline — always retrieves, always same way | Let an agent decide whether to retrieve, what to retrieve, and how many times | Moving from fixed pipeline to dynamic decision-making | ⬅️ Next |
 | 6f | RAG Pattern — Graph RAG | Flat chunks in vector DB | Store knowledge as a graph (entities + relationships) instead of flat chunks | Structured knowledge retrieval — better for connected concepts | — |
 | 7 | LangChain | Everything wired manually | Rebuild the same RAG pipeline using LangChain abstractions | Framework fluency — chains, retrievers, prompt templates, memory | — |
 | 8 | LlamaIndex | LangChain only | Use LlamaIndex for advanced chunking and data ingestion | Better chunking strategies, multi-modal, complex document pipelines | — |
@@ -875,3 +875,76 @@ Question
 ```
 
 This is also called **Hybrid Search** — the most common production RAG pattern.
+
+---
+
+## Step 6d — Branched RAG (Hybrid Search)
+
+**Script:** `scripts/branched_pipeline.py`
+**Output:** `results/branched_results_20260423_100705.json`
+
+### How it works
+
+```
+Question
+    ├── Path A: BGE-large vector search (top-5)   → semantic similarity
+    └── Path B: BM25 keyword search (top-5)        → exact term frequency
+               ↓
+         Reciprocal Rank Fusion (RRF) — merge and score
+               ↓
+         Top-3 unique chunks by combined RRF score
+               ↓
+         Generate grounded answer
+```
+
+### Reciprocal Rank Fusion (RRF)
+
+The merge formula used in production hybrid search:
+
+```
+RRF score = 1/(rank + 60)   ← for each path
+            ↓ sum both paths
+```
+
+- K=60 dampens the effect of very high ranks
+- Chunk ranked #1 in both paths → highest combined score
+- Chunk only in one path → lower score but still included
+
+### Results
+
+| | Standard (BGE) | Branched RAG | HyDE |
+|---|---|---|---|
+| **Overall** | 95% (19/20) | **95% (19/20)** | 100% (20/20) |
+| **Q9 — pan sauce** | ❌ | ❌ | ✅ |
+| **Q20 — claw grip** | ✅ | ✅ (via BM25) | ✅ |
+
+### What the Sources column tells us
+
+| Source label | Meaning |
+|---|---|
+| `both` | Chunk appeared in top-5 of both paths — strong signal |
+| `both+vector` | Mix of chunks from both paths and vector-only |
+| `bm25+vector` | No chunk appeared in both — paths retrieved different chunks |
+| `bm25+both+vector` | All three categories present in top-3 |
+
+Q20 (claw grip) showed `bm25+vector` — BM25 found it by exact term match, vector search found something different. The merge brought the right chunk in.
+
+### Key findings
+
+**1. BM25 confirmed to fix Q20**
+"Claw grip" appeared in BM25 top-5 by exact keyword match. Vector search had also fixed it with BGE-large. But this confirms: if we only had MiniLM (384 dims), BM25 would have rescued Q20.
+
+**2. Q9 still not fixed**
+"Pan sauce" + "searing" → BM25 also matched deglazing doc (it mentions "pan", "sauce", "searing" too). The overlap exists at the keyword level as well as the vector level. Only HyDE fixes this because it changes what gets searched, not how.
+
+**3. 95% — same as standard BGE, better than re-ranking**
+Branched RAG matched the BGE baseline without regression. Unlike re-ranking which dropped to 90%, branched RAG held steady. It's additive — BM25 adds keyword coverage without hurting semantic retrieval.
+
+### When to use each pattern
+
+| Pattern | Best when | Our result |
+|---|---|---|
+| Better model (BGE-large) | Corpus has domain-specific terms needing richer semantics | 85% → 95% ✅ |
+| HyDE | Question vocabulary ≠ document vocabulary | 95% → 100% ✅ |
+| Re-ranking | Large corpus, many candidates need ordering | 90% (-5%) ❌ wrong tool |
+| **Branched RAG** | Mix of semantic + exact term queries in same corpus | 95% (stable) ✅ |
