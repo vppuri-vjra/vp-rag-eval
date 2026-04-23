@@ -1176,3 +1176,50 @@ Fixed pipelines are predictable and cheap. Agents are flexible and cost more (mu
 - Queries need reformulation (vocabulary mismatch)
 - Questions are complex and need multi-hop retrieval
 - You don't know in advance how many retrievals are needed
+
+---
+
+## Agentic RAG — When to Use It (and When Not To)
+
+### The honest answer
+Smarter ≠ always better choice. Agentic RAG costs more, takes longer, and is harder to debug. You don't default to it everywhere.
+
+### The trade-offs
+
+| | Fixed Pipeline | Agentic RAG |
+|---|---|---|
+| **Cost** | 1 LLM call per question | 2–5 LLM calls per question (avg 1.6 for us) |
+| **Latency** | ~1–2 seconds | ~3–8 seconds (multiple round trips) |
+| **Predictability** | Same steps every time | Different path every time |
+| **Failure modes** | Simple — retrieval failed or generation failed | Complex — which call failed? what query did it use? |
+| **Accuracy** | 95% (good) | 100% (better) |
+
+### When you actually need it
+
+| Problem | Example | Agentic fix |
+|---|---|---|
+| **Vocabulary mismatch** | "pan sauce" → wrong doc | Agent rephrases to "deglazing fond" |
+| **Multi-hop questions** | "Compare braising vs poaching for tough cuts" | Retrieves braising doc, then poaching doc, then answers |
+| **Unknown complexity** | Don't know if question needs 1 or 3 retrievals | Agent decides per question |
+
+### What our data showed
+For our 20 questions, **18 of them the agent called retrieve exactly once** — same as the fixed pipeline. The agent only showed its value on Q9 (vocabulary mismatch) and Q10, Q11, Q20 (multi-hop / needed rephrasing).
+
+That means: fix the simple cases first with a better model or HyDE. Use agents only for what's left.
+
+### The real-world decision
+
+```
+Simple, predictable questions   →  Fixed pipeline  (cheaper, faster, debuggable)
+Complex, varied questions       →  Agentic RAG     (flexible, smarter)
+Production at scale             →  Fixed pipeline first, agent only where it fails
+```
+
+### The interview answer
+*"Agentic RAG gets 100% but costs 1.6× more per question on average. For production, I'd use a fixed pipeline as the default and route only the complex or failing questions to an agent. You don't pay senior rates for every task."*
+
+### The hiring analogy
+- **Fixed pipeline** = reliable junior who follows the exact same process every time
+- **Agentic RAG** = senior who thinks, adapts, retries — but costs 3× more per task
+
+Use the senior where judgment matters. Not for every question.
