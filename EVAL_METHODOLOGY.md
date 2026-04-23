@@ -733,3 +733,88 @@ Do not say "I" or reference the question. Just write the answer as document cont
 - **HyDE** → fixes failures caused by question-document vocabulary mismatch
 
 Both were needed. Neither alone got to 100%.
+
+---
+
+## Step 6c — Re-ranking
+
+**Script:** `scripts/rerank_pipeline.py`
+**Output:** `results/rerank_results_20260422_212807.json`
+
+### How re-ranking works
+
+Two-stage retrieval — speed first, then accuracy:
+
+```
+Stage 1 — Bi-encoder (vector search):
+  Query vector vs chunk vectors — compared SEPARATELY
+  Fast — retrieve top-10 candidates
+
+Stage 2 — Cross-encoder (re-ranker):
+  [Query + Chunk] read TOGETHER in one pass
+  Scores each of the 10 pairs 0-1 for relevance
+  Return top-3 by score
+```
+
+| | Bi-encoder | Cross-encoder |
+|---|---|---|
+| Input | Query vector + chunk vector separately | Query + chunk text together |
+| Speed | Fast — pre-computed | Slow — must re-score each pair |
+| Accuracy | Good | Better — sees full context |
+| Role | First pass — cast wide net | Second pass — refine |
+
+**Model used:** `cross-encoder/ms-marco-MiniLM-L-6-v2` — free, local
+
+### Results — re-ranking went DOWN
+
+| Pipeline | Accuracy | Delta |
+|---|---|---|
+| Standard RAG (MiniLM) | 85% (17/20) | baseline |
+| Standard RAG (BGE-large) | 95% (19/20) | +10% |
+| HyDE RAG (BGE-large) | 100% (20/20) | +15% |
+| **Re-ranking RAG** | **90% (18/20)** | **-5% ⚠️** |
+
+**What broke:**
+- Q9 — still failing (expected — re-ranking can't fix vocabulary mismatch, that's HyDE's job)
+- Q20 — **newly broke** — claw grip was in the top-10 vector results but the cross-encoder scored it lower than unrelated chunks
+
+### Teaching points — why re-ranking underperformed here
+
+**1. Re-ranking is not always better**
+The cross-encoder is trained on MS MARCO — a general web search dataset. "Claw grip" is a domain-specific term. The re-ranker didn't recognise it as relevant to knife skills and downranked the correct chunk.
+
+**2. Re-ranking fixes a different problem than HyDE**
+- HyDE fixes: question vocabulary ≠ document vocabulary
+- Re-ranking fixes: vector search returns the right docs but in wrong order
+On our dataset, vector search already had good ordering after BGE-large. Re-ranking added noise instead of signal.
+
+**3. Tool mismatch — our corpus is too small**
+Re-ranking shines when vector search returns 10-50 relevant-looking candidates that need to be sorted precisely. With 97 chunks and specific section-based docs, vector search was already precise enough. Re-ranking added a model that wasn't calibrated to our domain.
+
+**4. More stages = more failure points**
+Each stage can fail independently. Adding re-ranking added a second failure point without fixing the one we had (Q9).
+
+### The real lesson
+
+Re-ranking is the right tool when:
+- Your corpus is large (1000s of chunks)
+- Vector search returns many relevant-looking candidates in wrong order
+- You have a domain-specific re-ranker or enough data to fine-tune one
+
+Re-ranking is the wrong tool when:
+- Your failure is vocabulary mismatch (use HyDE instead)
+- Your corpus is small and vector search is already precise
+- The re-ranker model is out-of-domain
+
+### Full comparison across all patterns
+
+| | Standard (MiniLM) | Standard (BGE) | HyDE (BGE) | Re-rank (BGE) |
+|---|---|---|---|---|
+| **Embedding** | 384d | 1024d | 1024d | 1024d |
+| **Search query** | Question | Question | Hypothesis | Question |
+| **Re-ranker** | — | — | — | Cross-encoder |
+| **Overall** | 85% | 95% | **100%** | 90% |
+| **Q9 — pan sauce** | ❌ | ❌ | ✅ | ❌ |
+| **Q11 — fond** | ❌ | ✅ | ✅ | ✅ |
+| **Q20 — claw grip** | ❌ | ✅ | ✅ | ❌ |
+| **Best for** | Prototypes | Better semantics | Vocab mismatch | Large corpora |
