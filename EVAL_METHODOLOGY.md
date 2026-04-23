@@ -843,3 +843,35 @@ Re-ranking is the wrong tool when:
 | **Q11 — fond** | ❌ | ✅ | ✅ | ✅ |
 | **Q20 — claw grip** | ❌ | ✅ | ✅ | ❌ |
 | **Best for** | Prototypes | Better semantics | Vocab mismatch | Large corpora |
+
+---
+
+## Why No Single Retrieval Path Is Enough — The Case for Branched RAG
+
+Every retrieval method has a blind spot. This is why Branched RAG (Step 6d) exists.
+
+| Retrieval path | How it works | Good at | Bad at |
+|---|---|---|---|
+| **Vector search (semantic)** | Converts query to 384 or 1024 dim vector, finds closest chunk vectors by cosine similarity | Understanding meaning — "pan sauce" finds related cooking concepts even without exact word match | Exact rare terms — "claw grip" had no semantic neighbors, so MiniLM couldn't find it |
+| **Keyword search (BM25)** | Counts exact word matches, ranks by term frequency | Exact rare terms — "claw grip" found instantly if those exact words exist in a chunk | Understanding meaning — "build a pan sauce" won't match a chunk that says "reduction method" |
+
+**The lesson from our failures:**
+
+| Failure | What went wrong | Right fix |
+|---|---|---|
+| Q20 — claw grip (MiniLM) | "claw grip" had no semantic neighbors — vector search guessing | Keyword search (BM25) — finds exact term |
+| Q9 — pan sauce | Question vocabulary ≠ document vocabulary | HyDE or Branched RAG |
+| Q11 — fond (MiniLM) | 384 dims too coarse to separate fond/sautéing | Better model (1024 dims) |
+
+**Branched RAG runs both paths and merges results:**
+```
+Question
+    ├── Path A: Vector search  → top-3 by cosine similarity
+    └── Path B: Keyword (BM25) → top-3 by term frequency
+               ↓
+         Merge + deduplicate → best chunks from both
+               ↓
+         Generate answer
+```
+
+This is also called **Hybrid Search** — the most common production RAG pattern.
