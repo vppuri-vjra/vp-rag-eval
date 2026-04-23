@@ -948,3 +948,49 @@ Branched RAG matched the BGE baseline without regression. Unlike re-ranking whic
 | HyDE | Question vocabulary ≠ document vocabulary | 95% → 100% ✅ |
 | Re-ranking | Large corpus, many candidates need ordering | 90% (-5%) ❌ wrong tool |
 | **Branched RAG** | Mix of semantic + exact term queries in same corpus | 95% (stable) ✅ |
+
+---
+
+## All 5 Patterns — Side by Side
+
+| | Standard (MiniLM) | Standard (BGE) | Re-ranking | Branched RAG | HyDE |
+|---|---|---|---|---|---|
+| **Embedding** | all-MiniLM-L6-v2 | BGE-large | BGE-large | BGE-large + BM25 | BGE-large |
+| **Dimensions** | 384 | 1024 | 1024 | 1024 + keyword | 1024 |
+| **Search query** | Question | Question | Question | Question (2 paths) | Hypothesis |
+| **Extra model** | — | — | Cross-encoder | BM25 (no model) | Claude (generate hypothesis) |
+| **Overall accuracy** | 85% (17/20) | 95% (19/20) | 90% (18/20) | 95% (19/20) | **100% (20/20)** |
+| **Easy** | 85.7% | 100% | — | 100% | 100% |
+| **Medium** | 77.8% | 88.9% | — | 88.9% | **100%** |
+| **Hard** | 100% | 100% | — | 100% | 100% |
+| **Q9 — pan sauce** | ❌ | ❌ | ❌ | ❌ | ✅ |
+| **Q11 — fond** | ❌ | ✅ | ✅ | ✅ | ✅ |
+| **Q20 — claw grip** | ❌ | ✅ | ❌ | ✅ | ✅ |
+| **Cost** | Free, local | Free, local | Free, local | Free, local | API call per question |
+| **Speed** | Fastest | Fast | Slow (re-score 10) | Fast (BM25 instant) | Slower (2 Claude calls) |
+| **Verdict** | Prototype | Good baseline | Wrong tool here | Stable, additive | Best accuracy |
+
+### Progression story
+
+```
+85%  →  95%  →  90%  →  95%  →  100%
+MiniLM   BGE   Rerank  Branched  HyDE
+```
+
+### What each pattern taught
+
+| Pattern | Key lesson |
+|---|---|
+| **Better model (BGE-large)** | More dimensions = better semantic separation. Fixed representation failures — Q11 (fond) and Q20 (claw grip). One line change, +10% |
+| **Re-ranking** | More stages ≠ better. Cross-encoder was out-of-domain (trained on web search, not cooking). Wrong tool for small corpus where vector search is already precise. -5% |
+| **Branched RAG** | BM25 is additive — covers exact term failures that vector misses, without hurting semantic retrieval. No regression. Confirmed BM25 as right fix for Q20 |
+| **HyDE** | Changing *what gets searched* beats changing *how it gets searched*. Hypothesis reads like a document — bridges question-to-document vocabulary gap. Only pattern that fixed Q9 |
+
+### The two types of retrieval failure — and their fixes
+
+| Failure type | Example | Why it fails | Right fix |
+|---|---|---|---|
+| **Representation failure** | Q11 (fond), Q20 (claw grip) with MiniLM | 384 dims too coarse — model can't place concept in right neighbourhood | Better embedding model (more dims) |
+| **Vocabulary mismatch** | Q9 (pan sauce) | Question words match wrong doc — overlap at both semantic and keyword level | HyDE — generate hypothesis that reads like the right doc |
+| **Exact term gap** | Q20 (claw grip) with MiniLM | Term too specific, no semantic neighbours | BM25 keyword search |
+| **Out-of-domain re-ranker** | Q20 broke with re-ranking | Cross-encoder not calibrated to cooking domain | Domain-specific re-ranker or fine-tuned model |
