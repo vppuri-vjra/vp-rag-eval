@@ -194,7 +194,7 @@ Storing whole documents in a vector database causes:
 | 6c | RAG Pattern — Re-ranking | **100%** with HyDE — testing a different pattern on BGE baseline (95%) | Retrieve top-10 with BGE-large (**1024 dim** vectors), re-score all 10 with cross-encoder, keep top-3 | Cross-encoder reads both texts together — no fixed dims. More stages ≠ better. Went to 90% (-5%) | ✅ Done |
 | 6d | RAG Pattern — Branched RAG | Single retrieval path | Vector (BGE, 1024d) + BM25 in parallel, merge via RRF → top-3 | No single path covers everything — BM25 fixes exact terms, vector fixes meaning. Held at 95% | ✅ Done |
 | 7 | LangChain | Everything wired manually | Rebuild the same BGE-large RAG pipeline using LangChain: HuggingFaceEmbeddings, Chroma, ChatAnthropic, PromptTemplate, LCEL chain | Framework fluency — same 95% accuracy proves parity; LCEL pipe operator composes retriever → prompt → LLM → parser | ✅ Done |
-| 6e | RAG Pattern — Agentic RAG | Fixed pipeline — always retrieves, always same way | Let an agent decide whether to retrieve, what to retrieve, and how many times | Moving from fixed pipeline to dynamic decision-making | ⬅️ Next |
+| 6e | RAG Pattern — Agentic RAG | Fixed pipeline — always retrieves, always same way | Claude gets a `retrieve` tool via tool_use API — decides what query to use, calls it up to 5×, stops when it has enough | Fixed pipelines can't rephrase queries. Agent rephrased Q9 to "deglazing fond" → fixed it. Avg 1.6 calls/question. 95% → 100% | ✅ Done |
 | 6f | RAG Pattern — Graph RAG | Flat chunks in vector DB | Store knowledge as a graph (entities + relationships) instead of flat chunks | Structured knowledge retrieval — better for connected concepts | — |
 | 8 | LlamaIndex | LangChain only | Use LlamaIndex for advanced chunking and data ingestion | Better chunking strategies, multi-modal, complex document pipelines | — |
 | 9 | Agentic Eval | Eval for single Q→A only | Evaluate a multi-step agent — not just one question → one answer | Trace-level evaluation, tool use, non-deterministic chain scoring | — |
@@ -1111,3 +1111,68 @@ LangSmith   =   the debugger + dashboard for that pipeline
 ```
 
 LangSmith is separate — you can use LangChain without it. But in production, LangSmith is how teams catch regressions, monitor cost, and debug failures at scale.
+
+---
+
+## Step 6e — Agentic RAG
+
+### What changed
+Every previous pipeline was fixed — always retrieve once, always use the exact question as the query. The agent breaks both constraints.
+
+| | Fixed pipeline | Agentic RAG |
+|---|---|---|
+| **Whether to retrieve** | Always | Agent decides |
+| **Query used** | Your exact question | Agent rephrases freely |
+| **How many times** | Exactly once | 1–5× until it has enough |
+| **Loop** | No loop | tool_use loop — retrieve → think → retrieve again? → answer |
+
+### How it works
+
+Claude receives the question + a `retrieve` tool definition. The tool_use loop:
+
+```
+1. Send question to Claude
+2. Claude calls retrieve("pan sauce deglazing fond")    ← agent chose this query
+3. We execute ChromaDB search, return chunks
+4. Claude reads results → enough? → answer
+                        → not enough? → calls retrieve again with different query
+5. Repeat up to MAX_ITERATIONS=5
+6. Claude emits final text answer → done
+```
+
+### Results
+
+| Q | Std | Agent | Calls | Queries the agent used |
+|---|---|---|---|---|
+| Q9 — pan sauce | ❌ | ✅ | 1 | `pan sauce deglazing fond seari...` |
+| Q10 — poaching | ✅ | ✅ | 3 | `vinegar poaching eggs` → `protein coagulation` → `acid egg white set` |
+| Q11 — deglazing | ✅ | ✅ | 3 | `fond browned bits` → `fond Maillard` → `deglazing fond sauce` |
+| Q20 — claw grip | ✅ | ✅ | 4 | `claw grip knife` → `claw grip fingers` → `hand safety` → `knife grip` |
+| Q1, Q3, Q7... | ✅ | ✅ | 1 | Straightforward — one query, done |
+
+**Overall: 100% (20/20) — avg 1.6 retrieve calls per question**
+
+### Why Q9 finally got fixed
+The agent's system prompt says: *"write queries as document search terms, not as questions."*
+
+So instead of searching `"How do I build a pan sauce?"` (which matched the wrong doc), the agent searched `"pan sauce deglazing fond searing"` — document language that lands next to the right chunks in vector space.
+
+This is the same insight as HyDE — bridge the question-to-document vocabulary gap — but the agent does it through query reformulation, not hypothesis generation.
+
+### Fixed vs Agentic — the fundamental difference
+
+```
+Fixed pipeline:
+  always → retrieve(your question) → generate
+
+Agentic pipeline:
+  think → retrieve(what I decide to search for)
+        → think → enough? → answer
+                → not enough? → retrieve(different query)
+                             → think → answer
+```
+
+Fixed pipelines are predictable and cheap. Agents are flexible and cost more (multiple LLM calls). Use agents when:
+- Queries need reformulation (vocabulary mismatch)
+- Questions are complex and need multi-hop retrieval
+- You don't know in advance how many retrievals are needed
