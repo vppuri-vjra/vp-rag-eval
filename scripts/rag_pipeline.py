@@ -37,7 +37,7 @@ load_dotenv(ROOT / ".env")
 MODEL            = "claude-opus-4-5"
 MAX_TOKENS       = 512
 COLLECTION_NAME  = "cooking_techniques"
-EMBEDDING_MODEL  = "all-MiniLM-L6-v2"
+EMBEDDING_MODEL  = "BAAI/bge-large-en-v1.5"
 TOP_K            = 3  # number of chunks to retrieve per question
 
 

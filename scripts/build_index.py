@@ -23,7 +23,7 @@ CHUNKS_FILE = ROOT / "data" / "chunks.json"
 CHROMA_DIR  = ROOT / "chroma_db"
 
 COLLECTION_NAME  = "cooking_techniques"
-EMBEDDING_MODEL  = "all-MiniLM-L6-v2"  # fast, lightweight, 384 dimensions
+EMBEDDING_MODEL  = "BAAI/bge-large-en-v1.5"  # 1024 dimensions, better semantic understanding
 
 
 # ── Main ──────────────────────────────────────────────────────────────────────

@@ -608,8 +608,63 @@ You cannot explain why New York's latitude is exactly 40.71 — it just is, base
 ### Production alternatives
 | Model | Dimensions | Notes |
 |---|---|---|
-| `all-MiniLM-L6-v2` | 384 | Fast, local, free — good for prototypes |
+| `all-MiniLM-L6-v2` | 384 | Fast, local, free — good for prototypes ← we started here |
+| `BAAI/bge-large-en-v1.5` | 1024 | Better semantic understanding, still local and free ← Step 6a |
 | `all-mpnet-base-v2` | 768 | Better accuracy, slower — still local |
 | OpenAI `text-embedding-3-small` | 1536 | API call, costs money, higher accuracy |
 | OpenAI `text-embedding-3-large` | 3072 | Best accuracy, higher cost |
 | Anthropic (no embedding API) | — | Anthropic does not offer an embedding model |
+
+---
+
+## Step 6a — Embedding Model Swap: all-MiniLM-L6-v2 → BGE-large
+
+**Change made:** One line in `scripts/build_index.py` and `scripts/rag_pipeline.py`
+
+```python
+# Before
+EMBEDDING_MODEL = "all-MiniLM-L6-v2"   # 384 dimensions
+
+# After
+EMBEDDING_MODEL = "BAAI/bge-large-en-v1.5"  # 1024 dimensions
+```
+
+Then rebuilt ChromaDB index and re-ran all 20 questions.
+
+### Results comparison
+
+| | all-MiniLM-L6-v2 | BGE-large | Change |
+|---|---|---|---|
+| **Overall** | 85% (17/20) | **95% (19/20)** | **+10% ✅** |
+| Easy | 85.7% (6/7) | 100% (7/7) | +14.3% ✅ |
+| Medium | 77.8% (7/9) | 88.9% (8/9) | +11.1% ✅ |
+| Hard | 100% (4/4) | 100% (4/4) | — |
+
+### What changed per failure
+
+| Q | Before (MiniLM) | After (BGE-large) | Why |
+|---|---|---|---|
+| Q9 — pan sauce | ❌ got deglazing | ❌ still got deglazing | Genuine content overlap — pan sauce concept lives in both docs. Distance 0.25 = model is very confident in wrong answer. Not a model problem. |
+| Q11 — fond | ❌ got sautéing | ✅ **fixed** | BGE-large's richer 1024-dim vector understood that "fond" belongs in deglazing context, not sautéing |
+| Q20 — claw grip | ❌ not in top-3 | ✅ **fixed** | BGE-large found knife_skills at rank 2 — richer representation of "claw grip" as a specific technique |
+
+### Key insight — what more dimensions actually did
+
+More dimensions = more detail encoded per chunk = better at separating similar-but-different concepts.
+
+```
+384 dimensions (MiniLM):  "pan sauce" ≈ "deglazing" ≈ "searing" (too similar)
+1024 dimensions (BGE):    "pan sauce" ≈ "reduction", "deglazing" = related but distinct
+```
+
+Q11 and Q20 were fixable with a better model. Q9 is not — the content overlap is real regardless of model quality. That is a retrieval architecture problem, not a model problem. **HyDE or re-ranking is the fix for Q9.**
+
+### Why Q9 is different
+
+Distance score tells the story:
+
+| | MiniLM distance | BGE distance |
+|---|---|---|
+| Q9 top hit (wrong) | 0.44 | **0.25** |
+
+BGE-large is *more confident* in the wrong answer than MiniLM was. The pan sauce concept is so tightly encoded in the deglazing doc that a richer model doubles down on it. This confirms the failure is content-based, not model-based.
