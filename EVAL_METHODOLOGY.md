@@ -180,7 +180,32 @@ Storing whole documents in a vector database causes:
 
 ---
 
-## End-to-End Eval Steps
+## Knowledge Progression — Full Table
+
+| Step | Project / Topic | Before this step | What it does | What you learn | Status |
+|------|----------------|-----------------|--------------|----------------|--------|
+| 1 | VP Recipe Agent | No eval system | Build a recipe chatbot, run 20 test queries, measure pass/fail with a regex checker | System prompt design, bulk testing, TPR/TNR, confusion matrix, failure taxonomy, 3 Gulfs | ✅ Done |
+| 2 | VP Substitution Agent | Checker not yet built | Build an ingredient substitution chatbot, iterate checker from V1→V4 until 0 false positives | Rule-based checker design, checker iteration, human review, ground truth labeling | ✅ Done |
+| 3 | VP Substitution Agent — LLM Judge | Regex checker only — no meaning-based eval | Send all 20 responses to Claude acting as a judge — score each on 4 criteria | LLM-as-judge pattern, structured scoring, judge vs human agreement rate | ✅ Done |
+| 4 | VP Substitution Agent — A/B Testing | One prompt, no comparison | Run two versions of the system prompt through the same 20 queries, compare scores | A/B prompt testing, one variable at a time, data-driven prompt decisions | ✅ Done |
+| 5 | VP RAG Eval | No RAG — Claude answers from training data only | Build full RAG pipeline — 20 docs → chunk → embed (all-MiniLM-L6-v2, **384 dims**) → retrieve → generate → evaluate | Chunking, vector embeddings — each chunk becomes 384 numbers, ChromaDB stores and searches by cosine similarity | ✅ Done |
+| 6a | Swap Embedding Model | **384 dims**, retrieval accuracy **85%** (17/20) | Replace all-MiniLM-L6-v2 with BGE-large (**1024 dims**), rebuild index, re-run 20 questions | More dimensions = richer vector = better at separating similar concepts. 85% → 95%. Q11 and Q20 fixed | ✅ Done |
+| 6b | RAG Pattern — HyDE | **1024 dims**, retrieval accuracy **95%** (19/20), Q9 still failing | Ask Claude to write a hypothetical answer first, embed that (**1024 dims**) as the search query instead of the question | Question and document live in different vector spaces — hypothesis bridges the gap. 95% → 100%. Q9 fixed | ✅ Done |
+| 6c | RAG Pattern — Re-ranking | **100%** with HyDE — testing a different pattern on BGE baseline (95%) | Retrieve top-10 with BGE-large (**1024 dim** vectors), re-score all 10 with cross-encoder, keep top-3 | Cross-encoder reads both texts together — no fixed dims. More stages ≠ better. Went to 90% (-5%) | ✅ Done |
+| 6d | RAG Pattern — Branched RAG | Single retrieval path | Run multiple retrieval strategies in parallel, merge and deduplicate results | When one retrieval path isn't enough — combine vector + keyword + other signals | ⬅️ Next |
+| 6e | RAG Pattern — Agentic RAG | Fixed pipeline — always retrieves, always same way | Let an agent decide whether to retrieve, what to retrieve, and how many times | Moving from fixed pipeline to dynamic decision-making | — |
+| 6f | RAG Pattern — Graph RAG | Flat chunks in vector DB | Store knowledge as a graph (entities + relationships) instead of flat chunks | Structured knowledge retrieval — better for connected concepts | — |
+| 7 | LangChain | Everything wired manually | Rebuild the same RAG pipeline using LangChain abstractions | Framework fluency — chains, retrievers, prompt templates, memory | — |
+| 8 | LlamaIndex | LangChain only | Use LlamaIndex for advanced chunking and data ingestion | Better chunking strategies, multi-modal, complex document pipelines | — |
+| 9 | Agentic Eval | Eval for single Q→A only | Evaluate a multi-step agent — not just one question → one answer | Trace-level evaluation, tool use, non-deterministic chain scoring | — |
+| 10 | Fine-tuning Eval | No baseline comparison framework | Compare model before and after fine-tuning on the same eval set | Regression testing, eval-driven fine-tune validation | — |
+| 11 | DeepLearning.AI Prompt Engineering | Ad-hoc prompting | Work through structured course modules with exercises | Chain-of-thought, few-shot, prompt chaining, structured techniques | — |
+| 12 | Production Eval Patterns | One-off experiments | Wire evals into CI/CD, build dashboards, add human review at scale | Evals in production — not just experiments but ongoing quality gates | — |
+| 13 | Portfolio — Tell Phase | Work done but not articulated | Write about what you built, publish on LinkedIn, prep interview stories | Articulate AI eval work confidently to hiring managers and peers | — |
+
+---
+
+## End-to-End Eval Steps (RAG Pipeline)
 
 | Step | Part | Purpose | What | Owner | Status | Location |
 |------|------|---------|------|-------|--------|----------|
