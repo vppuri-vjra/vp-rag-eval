@@ -668,3 +668,68 @@ Distance score tells the story:
 | Q9 top hit (wrong) | 0.44 | **0.25** |
 
 BGE-large is *more confident* in the wrong answer than MiniLM was. The pan sauce concept is so tightly encoded in the deglazing doc that a richer model doubles down on it. This confirms the failure is content-based, not model-based.
+
+---
+
+## Step 6b — HyDE (Hypothetical Document Embeddings)
+
+**Script:** `scripts/hyde_pipeline.py`
+**Output:** `results/hyde_results_20260422_211525.json`
+
+### What HyDE does differently
+
+Standard RAG searches with the question. HyDE searches with a hypothetical answer.
+
+```
+Standard RAG:
+  "How do I build a pan sauce after searing meat?"
+  → question vector → matches deglazing doc ❌
+
+HyDE RAG:
+  "How do I build a pan sauce after searing meat?"
+        ↓ Claude generates hypothesis:
+  "To build a pan sauce, remove the meat, deglaze with wine, add stock
+   and reduce by half to concentrate the flavors and create a silky sauce..."
+        ↓ hypothesis vector → matches reduction doc ✅
+```
+
+Questions ask. Documents answer. Hypothesis reads like a document — so it matches document content better than a question does.
+
+### The HyDE prompt
+
+```
+You are a culinary expert writing content for a cooking techniques reference guide.
+Write a short passage (3-5 sentences) that directly answers the following question.
+Write it as if it were a section of a cookbook — factual, specific, instructional.
+Do not say "I" or reference the question. Just write the answer as document content.
+```
+
+### Results
+
+| | Standard RAG (MiniLM) | Standard RAG (BGE-large) | HyDE RAG (BGE-large) |
+|---|---|---|---|
+| **Embedding model** | all-MiniLM-L6-v2 | BGE-large | BGE-large |
+| **Dimensions** | 384 | 1024 | 1024 |
+| **Search query** | Original question | Original question | Claude's hypothetical answer |
+| **Overall accuracy** | 85% (17/20) | 95% (19/20) | **100% (20/20)** |
+| **Easy** | 85.7% (6/7) | 100% (7/7) | 100% (7/7) |
+| **Medium** | 77.8% (7/9) | 88.9% (8/9) | **100% (9/9)** |
+| **Hard** | 100% (4/4) | 100% (4/4) | 100% (4/4) |
+| **Q9 — pan sauce** | ❌ | ❌ | ✅ **fixed** |
+| **Q11 — fond** | ❌ | ✅ fixed | ✅ |
+| **Q20 — claw grip** | ❌ | ✅ fixed | ✅ |
+
+### What fixed each failure
+
+| Failure | Root cause | Fix |
+|---|---|---|
+| Q11 — fond | Weak semantic representation — 384 dims couldn't separate fond/sautéing | Better model (BGE-large, 1024 dims) |
+| Q20 — claw grip | No semantic neighbors — MiniLM couldn't place "claw grip" near knife skills | Better model (BGE-large, 1024 dims) |
+| Q9 — pan sauce | Question vocabulary matched wrong doc — "pan sauce" ≈ deglazing | HyDE — hypothesis reads like reduction doc content |
+
+### Key insight — they fix different types of problems
+
+- **Better model** → fixes failures caused by weak or missing semantic representation
+- **HyDE** → fixes failures caused by question-document vocabulary mismatch
+
+Both were needed. Neither alone got to 100%.
