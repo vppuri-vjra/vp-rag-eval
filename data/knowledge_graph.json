@@ -1,0 +1,494 @@
+{
+  "metadata": {
+    "total_docs": 20,
+    "total_nodes": 20,
+    "total_edges": 17,
+    "edge_threshold": 2,
+    "model": "claude-opus-4-5"
+  },
+  "doc_concepts": {
+    "doc_01_blanching": [
+      "blanching",
+      "shocking",
+      "ice bath",
+      "rolling boil",
+      "enzyme deactivation",
+      "skin loosening",
+      "chlorophyll preservation",
+      "salted water",
+      "boiling point elevation",
+      "partial cooking",
+      "vegetable freezing preparation",
+      "bitterness removal",
+      "carryover cooking prevention",
+      "slotted spoon straining"
+    ],
+    "doc_02_sauteing": [
+      "sautéing",
+      "dry-heat cooking",
+      "fond",
+      "maillard reaction",
+      "smoke point",
+      "clarified butter",
+      "pan-frying",
+      "stir-frying",
+      "browning",
+      "caramelization",
+      "pan temperature control",
+      "single-layer cooking",
+      "deglazing"
+    ],
+    "doc_03_emulsification": [
+      "emulsification",
+      "emulsion",
+      "emulsifier",
+      "lecithin",
+      "mucilage",
+      "temporary emulsion",
+      "semi-permanent emulsion",
+      "permanent emulsion",
+      "broken emulsion",
+      "mayonnaise",
+      "hollandaise",
+      "vinaigrette",
+      "beurre blanc",
+      "oil-water repulsion",
+      "droplet suspension"
+    ],
+    "doc_04_braising": [
+      "braising",
+      "combination cooking method",
+      "searing",
+      "maillard reaction",
+      "collagen breakdown",
+      "gelatin",
+      "deglazing",
+      "aromatics",
+      "dutch oven",
+      "mirepoix",
+      "fond",
+      "self-basting",
+      "fork-tender",
+      "low and slow cooking"
+    ],
+    "doc_05_caramelization": [
+      "caramelization",
+      "pyrolysis",
+      "maillard reaction",
+      "sucrose",
+      "fructose",
+      "glucose",
+      "lactose",
+      "crystallization",
+      "wet method caramel",
+      "caramelized onions",
+      "browning",
+      "residual heat carryover",
+      "sugar melting points"
+    ],
+    "doc_06_maillard_reaction": [
+      "maillard reaction",
+      "amino acids",
+      "reducing sugars",
+      "melanoidins",
+      "caramelization",
+      "browning",
+      "smoke point",
+      "fond",
+      "searing",
+      "moisture control",
+      "heat transfer",
+      "crust formation",
+      "pan preheating",
+      "protein-sugar interaction"
+    ],
+    "doc_07_brining": [
+      "brining",
+      "wet brine",
+      "dry brine",
+      "osmosis",
+      "protein denaturation",
+      "moisture retention",
+      "maillard browning",
+      "kosher salt",
+      "aromatics",
+      "salt-to-water ratio",
+      "refrigerator aging",
+      "surface drying",
+      "meat seasoning penetration"
+    ],
+    "doc_08_tempering_chocolate": [
+      "tempering",
+      "cocoa butter crystals",
+      "form v beta crystals",
+      "fat bloom",
+      "chocolate snap",
+      "tabling method",
+      "seeding method",
+      "crystal structure",
+      "working temperature",
+      "marble slab tempering",
+      "dark chocolate",
+      "milk chocolate",
+      "white chocolate",
+      "fat migration"
+    ],
+    "doc_09_reduction": [
+      "reduction",
+      "evaporation",
+      "fond",
+      "glace",
+      "deglazing",
+      "simmering",
+      "pan sauce",
+      "stock reduction",
+      "wine reduction",
+      "cream reduction",
+      "balsamic reduction",
+      "flavor concentration",
+      "surface area evaporation",
+      "nappé consistency"
+    ],
+    "doc_10_poaching": [
+      "poaching",
+      "moist-heat cooking",
+      "protein coagulation",
+      "court bouillon",
+      "shallow poaching",
+      "simmering",
+      "aromatics",
+      "poaching liquid",
+      "temperature control",
+      "delicate proteins",
+      "whirlpool technique",
+      "acid in cooking",
+      "slotted spoon draining"
+    ],
+    "doc_11_deglazing": [
+      "deglazing",
+      "fond",
+      "maillard reaction",
+      "caramelization",
+      "searing",
+      "sautéing",
+      "pan sauce",
+      "reduction",
+      "monter au beurre",
+      "stock",
+      "acidity",
+      "high-heat cooking",
+      "finishing with cold butter"
+    ],
+    "doc_12_marinating": [
+      "marinating",
+      "protein denaturation",
+      "acid tenderization",
+      "fat-soluble flavor compounds",
+      "bromelain",
+      "papain",
+      "actinidin",
+      "enzyme-based tenderizing",
+      "brining",
+      "reactive metals",
+      "surface protein breakdown",
+      "aromatics",
+      "food safety temperature control"
+    ],
+    "doc_13_rendering_fat": [
+      "rendering",
+      "lard",
+      "duck fat",
+      "beef tallow",
+      "schmaltz",
+      "smoke point",
+      "cracklings",
+      "wet rendering",
+      "dry rendering",
+      "confit",
+      "connective tissue separation",
+      "low heat cooking",
+      "strain through cheesecloth"
+    ],
+    "doc_14_blooming_spices": [
+      "blooming spices",
+      "fat-soluble flavor compounds",
+      "dry toasting",
+      "tadka",
+      "whole spices",
+      "ground spices",
+      "ghee",
+      "maillard reaction",
+      "residual heat carryover",
+      "aromatic extraction",
+      "mustard seeds",
+      "cumin seeds",
+      "mortar and pestle",
+      "flavor distribution in fat"
+    ],
+    "doc_15_resting_meat": [
+      "resting meat",
+      "muscle fiber contraction",
+      "moisture redistribution",
+      "carryover cooking",
+      "internal temperature",
+      "maillard reaction",
+      "searing",
+      "tenting with foil",
+      "cutting board",
+      "meat juiciness",
+      "temperature equalization",
+      "resting times",
+      "muscle fiber relaxation"
+    ],
+    "doc_16_folding": [
+      "folding technique",
+      "beaten egg whites",
+      "whipped cream",
+      "air bubble preservation",
+      "protein networks",
+      "fat networks",
+      "gluten development",
+      "deflation",
+      "soufflé",
+      "mousse",
+      "chiffon cake",
+      "rubber spatula technique",
+      "lightening the base",
+      "overmixing"
+    ],
+    "doc_17_seasoning_cast_iron": [
+      "polymerized oil",
+      "smoke point",
+      "fatty acid chain polymerization",
+      "cast iron seasoning",
+      "non-stick coating formation",
+      "rust prevention",
+      "flaxseed oil",
+      "vegetable shortening",
+      "moisture evaporation",
+      "acidic food degradation",
+      "layer building technique",
+      "oil polymerization temperature",
+      "cast iron restoration"
+    ],
+    "doc_18_making_roux": [
+      "roux",
+      "starch granules",
+      "thickening agent",
+      "mother sauces",
+      "béchamel",
+      "velouté",
+      "espagnole",
+      "white roux",
+      "blonde roux",
+      "brown roux",
+      "dark roux",
+      "clarified butter",
+      "fat-to-flour ratio",
+      "starch gelatinization"
+    ],
+    "doc_19_steaming": [
+      "steaming",
+      "moist-heat cooking",
+      "steam condensation",
+      "nutrient preservation",
+      "water-soluble vitamins",
+      "bamboo steamer",
+      "metal steamer basket",
+      "boiling point",
+      "heat transfer",
+      "aromatics infusion",
+      "delicate food cooking",
+      "single-layer arrangement",
+      "steam circulation"
+    ],
+    "doc_20_knife_skills": [
+      "claw grip",
+      "large dice",
+      "medium dice",
+      "small dice",
+      "brunoise",
+      "julienne",
+      "chiffonade",
+      "mince",
+      "mirepoix",
+      "honing steel",
+      "whetstone",
+      "even cooking",
+      "knife safety",
+      "uniform cuts"
+    ]
+  },
+  "edges": [
+    {
+      "source": "doc_02_sauteing",
+      "target": "doc_04_braising",
+      "weight": 3,
+      "shared_concepts": [
+        "deglazing",
+        "fond",
+        "maillard reaction"
+      ]
+    },
+    {
+      "source": "doc_02_sauteing",
+      "target": "doc_05_caramelization",
+      "weight": 3,
+      "shared_concepts": [
+        "browning",
+        "caramelization",
+        "maillard reaction"
+      ]
+    },
+    {
+      "source": "doc_02_sauteing",
+      "target": "doc_06_maillard_reaction",
+      "weight": 5,
+      "shared_concepts": [
+        "browning",
+        "caramelization",
+        "fond",
+        "maillard reaction",
+        "smoke point"
+      ]
+    },
+    {
+      "source": "doc_02_sauteing",
+      "target": "doc_09_reduction",
+      "weight": 2,
+      "shared_concepts": [
+        "deglazing",
+        "fond"
+      ]
+    },
+    {
+      "source": "doc_02_sauteing",
+      "target": "doc_11_deglazing",
+      "weight": 5,
+      "shared_concepts": [
+        "caramelization",
+        "deglazing",
+        "fond",
+        "maillard reaction",
+        "sautéing"
+      ]
+    },
+    {
+      "source": "doc_04_braising",
+      "target": "doc_06_maillard_reaction",
+      "weight": 3,
+      "shared_concepts": [
+        "fond",
+        "maillard reaction",
+        "searing"
+      ]
+    },
+    {
+      "source": "doc_04_braising",
+      "target": "doc_09_reduction",
+      "weight": 2,
+      "shared_concepts": [
+        "deglazing",
+        "fond"
+      ]
+    },
+    {
+      "source": "doc_04_braising",
+      "target": "doc_11_deglazing",
+      "weight": 4,
+      "shared_concepts": [
+        "deglazing",
+        "fond",
+        "maillard reaction",
+        "searing"
+      ]
+    },
+    {
+      "source": "doc_04_braising",
+      "target": "doc_15_resting_meat",
+      "weight": 2,
+      "shared_concepts": [
+        "maillard reaction",
+        "searing"
+      ]
+    },
+    {
+      "source": "doc_05_caramelization",
+      "target": "doc_06_maillard_reaction",
+      "weight": 3,
+      "shared_concepts": [
+        "browning",
+        "caramelization",
+        "maillard reaction"
+      ]
+    },
+    {
+      "source": "doc_05_caramelization",
+      "target": "doc_11_deglazing",
+      "weight": 2,
+      "shared_concepts": [
+        "caramelization",
+        "maillard reaction"
+      ]
+    },
+    {
+      "source": "doc_05_caramelization",
+      "target": "doc_14_blooming_spices",
+      "weight": 2,
+      "shared_concepts": [
+        "maillard reaction",
+        "residual heat carryover"
+      ]
+    },
+    {
+      "source": "doc_06_maillard_reaction",
+      "target": "doc_11_deglazing",
+      "weight": 4,
+      "shared_concepts": [
+        "caramelization",
+        "fond",
+        "maillard reaction",
+        "searing"
+      ]
+    },
+    {
+      "source": "doc_06_maillard_reaction",
+      "target": "doc_15_resting_meat",
+      "weight": 2,
+      "shared_concepts": [
+        "maillard reaction",
+        "searing"
+      ]
+    },
+    {
+      "source": "doc_07_brining",
+      "target": "doc_12_marinating",
+      "weight": 3,
+      "shared_concepts": [
+        "aromatics",
+        "brining",
+        "protein denaturation"
+      ]
+    },
+    {
+      "source": "doc_09_reduction",
+      "target": "doc_11_deglazing",
+      "weight": 4,
+      "shared_concepts": [
+        "deglazing",
+        "fond",
+        "pan sauce",
+        "reduction"
+      ]
+    },
+    {
+      "source": "doc_11_deglazing",
+      "target": "doc_15_resting_meat",
+      "weight": 2,
+      "shared_concepts": [
+        "maillard reaction",
+        "searing"
+      ]
+    }
+  ]
+}
