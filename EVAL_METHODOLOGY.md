@@ -195,7 +195,7 @@ Storing whole documents in a vector database causes:
 | 6d | RAG Pattern — Branched RAG | Single retrieval path | Vector (BGE, 1024d) + BM25 in parallel, merge via RRF → top-3 | No single path covers everything — BM25 fixes exact terms, vector fixes meaning. Held at 95% | ✅ Done |
 | 7 | LangChain | Everything wired manually | Rebuild the same BGE-large RAG pipeline using LangChain: HuggingFaceEmbeddings, Chroma, ChatAnthropic, PromptTemplate, LCEL chain | Framework fluency — same 95% accuracy proves parity; LCEL pipe operator composes retriever → prompt → LLM → parser | ✅ Done |
 | 6e | RAG Pattern — Agentic RAG | Fixed pipeline — always retrieves, always same way | Claude gets a `retrieve` tool via tool_use API — decides what query to use, calls it up to 5×, stops when it has enough | Fixed pipelines can't rephrase queries. Agent rephrased Q9 to "deglazing fond" → fixed it. Avg 1.6 calls/question. 95% → 100% | ✅ Done |
-| 6f | RAG Pattern — Graph RAG | Flat chunks in vector DB | Store knowledge as a graph (entities + relationships) instead of flat chunks | Structured knowledge retrieval — better for connected concepts | — |
+| 6f | RAG Pattern — Graph RAG | Flat chunks in vector DB | Build knowledge graph (docs=nodes, shared concepts=edges), vector search → entry doc → graph traversal → neighbor context | Entry node accuracy is everything. Wrong vector start → wrong graph expansion. 95% → 75% (-20%). Harder failure than re-ranking | ✅ Done |
 | 8 | LlamaIndex | LangChain only | Use LlamaIndex for advanced chunking and data ingestion | Better chunking strategies, multi-modal, complex document pipelines | — |
 | 9 | Agentic Eval | Eval for single Q→A only | Evaluate a multi-step agent — not just one question → one answer | Trace-level evaluation, tool use, non-deterministic chain scoring | — |
 | 10 | Fine-tuning Eval | No baseline comparison framework | Compare model before and after fine-tuning on the same eval set | Regression testing, eval-driven fine-tune validation | — |
@@ -1223,3 +1223,83 @@ Production at scale             →  Fixed pipeline first, agent only where it f
 - **Agentic RAG** = senior who thinks, adapts, retries — but costs 3× more per task
 
 Use the senior where judgment matters. Not for every question.
+
+---
+
+## Step 6f — Graph RAG
+
+### What changed
+Instead of treating chunks as independent, Graph RAG builds explicit relationships between documents based on shared concepts.
+
+```
+Vector DB (flat — all previous pipelines):
+  chunk_blanching    ●   (no connection to anything)
+  chunk_maillard     ●
+  chunk_deglazing    ●
+  chunk_reduction    ●
+
+Knowledge Graph (Graph RAG):
+  maillard ──── sauteing ──── caramelization
+      │              │
+  braising ──── deglazing ──── reduction
+                                   ↑
+                           Q9 fix path (if entry is right)
+```
+
+### How it works
+
+**Build phase** (`build_graph.py`):
+1. Claude reads each of 20 docs, extracts 8–15 key concepts
+2. Graph: docs = nodes, edge if ≥2 shared concepts, weight = shared concept count
+3. Result: 20 nodes, 17 edges
+
+**Query phase** (`graph_pipeline.py`):
+1. Vector search → top-1 doc = **entry node**
+2. Graph traversal → top-2 neighbors by edge weight
+3. Retrieve best chunk from each neighbor doc
+4. Combined context: entry chunks + neighbor chunks → generate
+
+### Results
+
+| Q | Std | Graph | Entry doc | Problem |
+|---|---|---|---|---|
+| Q6 — Maillard | ✅ | ❌ | landed on `braising` | Braising neighbors (deglazing, sauteing) — never reached Maillard doc |
+| Q9 — pan sauce | ❌ | ❌ | landed on `deglazing` | Neighbors were sauteing + braising, not `reduction` |
+| Q10 — poaching | ✅ | ❌ | landed on `emulsification` | Isolated node — no neighbors, completely wrong |
+| Q18 — roux | ✅ | ❌ | landed on `deglazing` | Wrong entry, neighbors didn't include roux |
+| Q20 — knife skills | ✅ | ❌ | landed on `poaching` | Isolated node — no neighbors |
+
+**Overall: 75% (15/20) — dropped 20% vs standard BGE pipeline**
+
+### The key lesson
+
+**Graph RAG depends entirely on the entry node being correct.**
+
+If vector search lands on the wrong doc, graph traversal makes things worse — you expand context in the wrong direction. Fixed pipelines retrieve top-3 docs independently, giving 3 chances to find the right one. Graph RAG picks top-1 as entry, then traverses — one bad start cascades into multiple wrong neighbors.
+
+```
+Fixed pipeline:   retrieves doc_A, doc_B, doc_C  → 3 independent shots at the right answer
+Graph RAG:        entry = doc_A (wrong) → neighbors of doc_A → all wrong
+```
+
+### When Graph RAG actually works
+
+Graph RAG shines when:
+- Entry node retrieval is reliable (high precision vector search)
+- Questions genuinely span multiple connected documents (multi-hop)
+- The corpus has rich, consistent concept overlap between docs
+
+Our corpus: 20 small docs, several with weak vector signal → entry node unreliable → graph amplifies the error.
+
+### Full pattern comparison — updated
+
+| Pattern | Accuracy | Key lesson |
+|---|---|---|
+| Standard MiniLM (384d) | 85% | Baseline — representation too coarse |
+| Standard BGE (1024d) | 95% | Better dims fix representation failures |
+| Re-ranking | 90% (-5%) | Out-of-domain model hurts more than it helps |
+| Branched RAG | 95% | BM25 additive — no regression, exact term fix |
+| HyDE | 100% | Vocabulary mismatch fix — best overall |
+| Agentic RAG | 100% | Dynamic query reformulation — flexible |
+| LangChain | 95% | Framework parity — same accuracy, better structure |
+| **Graph RAG** | **75% (-20%)** | **Entry node failure cascades — wrong start, wrong expansion** |
