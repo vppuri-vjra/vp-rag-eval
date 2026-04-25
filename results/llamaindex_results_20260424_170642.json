@@ -1,0 +1,339 @@
+{
+  "metadata": {
+    "timestamp": "20260424_170642",
+    "framework": "LlamaIndex",
+    "model": "claude-opus-4-5",
+    "embedding_model": "BAAI/bge-large-en-v1.5",
+    "chunking": "SentenceSplitter(chunk_size=512, overlap=50)",
+    "index_type": "VectorStoreIndex",
+    "vector_store": "ChromaDB",
+    "top_k": 3,
+    "total": 20,
+    "retrieval_correct": 20,
+    "retrieval_accuracy": "100.0%",
+    "standard_accuracy": "95.0%",
+    "delta": "+5.0%",
+    "compare_against": "rag_results_20260422_210923.json"
+  },
+  "results": [
+    {
+      "id": "1",
+      "question": "How long should I blanch green beans?",
+      "difficulty": "easy",
+      "expected_doc_id": "doc_01_blanching",
+      "retrieved_doc_ids": [
+        "doc_01_blanching",
+        "doc_19_steaming",
+        "doc_07_brining"
+      ],
+      "retrieval_correct": true,
+      "top_hit_doc_id": "doc_01_blanching",
+      "answer": "Based on the provided information, green beans should be blanched for **2-3 minutes**.",
+      "status": "success",
+      "duration_ms": 2124
+    },
+    {
+      "id": "2",
+      "question": "Why does overcrowding a pan prevent browning when sautéing?",
+      "difficulty": "medium",
+      "expected_doc_id": "doc_02_sauteing",
+      "retrieved_doc_ids": [
+        "doc_02_sauteing",
+        "doc_11_deglazing",
+        "doc_19_steaming"
+      ],
+      "retrieval_correct": true,
+      "top_hit_doc_id": "doc_02_sauteing",
+      "answer": "Based on the provided information, when you overcrowd the pan while sautéing, **food steams instead of browns**.\n\nThe document lists \"Overcrowding the pan — food steams instead of browns\" as a common mistake in sautéing. This happens because when too much food is added to the pan, moisture released from the food cannot evaporate quickly enough, causing the food to steam rather than develop the browning (Maillard reaction) that sautéing is meant to achieve.",
+      "status": "success",
+      "duration_ms": 3396
+    },
+    {
+      "id": "3",
+      "question": "What ingredient in egg yolks makes mayonnaise stable?",
+      "difficulty": "medium",
+      "expected_doc_id": "doc_03_emulsification",
+      "retrieved_doc_ids": [
+        "doc_03_emulsification",
+        "doc_12_marinating",
+        "doc_02_sauteing"
+      ],
+      "retrieval_correct": true,
+      "top_hit_doc_id": "doc_03_emulsification",
+      "answer": "Based on the provided information, **lecithin** is the ingredient in egg yolks that makes mayonnaise stable. The document states that lecithin is \"found in egg yolks\" and is \"used in mayonnaise, hollandaise, aioli\" as a common emulsifier.",
+      "status": "success",
+      "duration_ms": 2333
+    },
+    {
+      "id": "4",
+      "question": "What cuts of beef work best for braising?",
+      "difficulty": "easy",
+      "expected_doc_id": "doc_04_braising",
+      "retrieved_doc_ids": [
+        "doc_04_braising",
+        "doc_20_knife_skills",
+        "doc_15_resting_meat"
+      ],
+      "retrieval_correct": true,
+      "top_hit_doc_id": "doc_04_braising",
+      "answer": "Based on the provided information, the best cuts of beef for braising are:\n\n- **Short ribs**\n- **Brisket**\n- **Chuck roast**\n- **Oxtail**\n\nThese are tough, collagen-rich cuts that benefit from the low and slow cooking method of braising, which breaks down the collagen into gelatin and tenderizes the meat.",
+      "status": "success",
+      "duration_ms": 2451
+    },
+    {
+      "id": "5",
+      "question": "How do I caramelize onions properly and how long does it take?",
+      "difficulty": "easy",
+      "expected_doc_id": "doc_05_caramelization",
+      "retrieved_doc_ids": [
+        "doc_05_caramelization",
+        "doc_01_blanching",
+        "doc_12_marinating"
+      ],
+      "retrieval_correct": true,
+      "top_hit_doc_id": "doc_05_caramelization",
+      "answer": "Based on the provided information, here's how to caramelize onions properly:\n\n**How to Caramelize Onions:**\n1. Slice onions thinly and evenly\n2. Cook in butter or oil over medium-low heat\n3. Stir occasionally — not constantly\n4. Cook 45-60 minutes until deep golden brown and jammy\n5. Add a pinch of salt to draw out moisture\n6. Do not rush with high heat — onions will burn not caramelize\n\n**Time Required:** 45-60 minutes\n\n**Important Notes:**\n- True caramelization takes 45+ minutes\n- A common mistake is calling browned onions done at 10 minutes — this is not true caramelization\n- Using too high heat will cause the onions to burn rather than caramelize",
+      "status": "success",
+      "duration_ms": 4141
+    },
+    {
+      "id": "6",
+      "question": "Why can't you brown meat by boiling it?",
+      "difficulty": "hard",
+      "expected_doc_id": "doc_06_maillard_reaction",
+      "retrieved_doc_ids": [
+        "doc_06_maillard_reaction",
+        "doc_02_sauteing",
+        "doc_19_steaming"
+      ],
+      "retrieval_correct": true,
+      "top_hit_doc_id": "doc_06_maillard_reaction",
+      "answer": "Based on the provided information:\n\nYou can't brown meat by boiling it because water boils at 212°F, which is far below the 280°F (140°C) needed for the Maillard reaction to occur. The Maillard reaction is the chemical reaction between amino acids (proteins) and reducing sugars that produces the brown color and complex flavors associated with cooked food. Since boiling water cannot reach the required temperature, the browning reaction cannot take place. This is why boiled chicken looks grey while roasted chicken looks brown.",
+      "status": "success",
+      "duration_ms": 2722
+    },
+    {
+      "id": "7",
+      "question": "What is the salt to water ratio for a basic wet brine?",
+      "difficulty": "easy",
+      "expected_doc_id": "doc_07_brining",
+      "retrieved_doc_ids": [
+        "doc_07_brining",
+        "doc_12_marinating",
+        "doc_04_braising"
+      ],
+      "retrieval_correct": true,
+      "top_hit_doc_id": "doc_07_brining",
+      "answer": "Based on the provided information, the salt to water ratio for a basic wet brine is:\n\n**1 cup kosher salt per 1 gallon of water**",
+      "status": "success",
+      "duration_ms": 1994
+    },
+    {
+      "id": "8",
+      "question": "How do I test if chocolate is properly tempered?",
+      "difficulty": "medium",
+      "expected_doc_id": "doc_08_tempering_chocolate",
+      "retrieved_doc_ids": [
+        "doc_08_tempering_chocolate",
+        "doc_05_caramelization",
+        "doc_13_rendering_fat"
+      ],
+      "retrieval_correct": true,
+      "top_hit_doc_id": "doc_08_tempering_chocolate",
+      "answer": "Based on the provided information, you can test if chocolate is properly tempered by dipping a knife tip into the chocolate. Properly tempered chocolate will set in 3-5 minutes with a glossy finish.",
+      "status": "success",
+      "duration_ms": 1894
+    },
+    {
+      "id": "9",
+      "question": "How do I build a pan sauce after searing meat?",
+      "difficulty": "medium",
+      "expected_doc_id": "doc_09_reduction",
+      "retrieved_doc_ids": [
+        "doc_11_deglazing",
+        "doc_09_reduction",
+        "doc_04_braising"
+      ],
+      "retrieval_correct": true,
+      "top_hit_doc_id": "doc_11_deglazing",
+      "answer": "# How to Build a Pan Sauce After Searing Meat\n\nBased on the provided information, here's how to build a pan sauce after searing meat:\n\n## Step-by-Step Process:\n\n1. **Remove the seared meat from the pan** — leave the fond (browned bits) behind\n\n2. **Pour off excess fat** if needed, leaving 1-2 tablespoons\n\n3. **Deglaze with wine** — with the pan still hot over medium-high heat, add the liquid (it will sizzle and steam vigorously)\n\n4. **Scrape up the fond** — use a wooden spoon or spatula to dissolve all the browned bits into the liquid\n\n5. **Reduce the wine by half**\n\n6. **Add stock** — reduce by half again\n\n7. **Optional: Add cream** for richness\n\n8. **Finish with cold butter** (monter au beurre) — swirl in off heat for gloss and body\n\n9. **Season with salt and pepper**\n\n10. **Strain through a fine mesh sieve** for an elegant sauce\n\n## Important Tips:\n- **Do not** add cold liquid to a scorching pan (risk of warping)\n- **Do not** skip scraping the fond — that's where all the flavor lives\n- **Do not** over-reduce — the sauce becomes too salty and intense\n- Season **after** reducing, since salt concentrates along with everything else\n- Use red wine for beef, white wine for chicken/fish/pork",
+      "status": "success",
+      "duration_ms": 5429
+    },
+    {
+      "id": "10",
+      "question": "Why does vinegar help when poaching eggs?",
+      "difficulty": "hard",
+      "expected_doc_id": "doc_10_poaching",
+      "retrieved_doc_ids": [
+        "doc_10_poaching",
+        "doc_12_marinating",
+        "doc_07_brining"
+      ],
+      "retrieval_correct": true,
+      "top_hit_doc_id": "doc_10_poaching",
+      "answer": "Based on the provided information:\n\nVinegar helps when poaching eggs because **acid speeds up protein coagulation** — the white sets faster and stays together rather than spreading into wispy threads.",
+      "status": "success",
+      "duration_ms": 1971
+    },
+    {
+      "id": "11",
+      "question": "What is fond and why is it important for flavor?",
+      "difficulty": "medium",
+      "expected_doc_id": "doc_11_deglazing",
+      "retrieved_doc_ids": [
+        "doc_11_deglazing",
+        "doc_12_marinating",
+        "doc_14_blooming_spices"
+      ],
+      "retrieval_correct": true,
+      "top_hit_doc_id": "doc_11_deglazing",
+      "answer": "Based on the provided information:\n\n**What is Fond:**\nFond (French for \"base\" or \"bottom\") refers to the browned, caramelized bits of protein and sugars that stick to the pan during high-heat cooking. They are the product of the Maillard reaction and caramelization.\n\n**Why it is Important for Flavor:**\nFond is packed with deep, savory flavor. These concentrated bits form the base of pan sauces. When you deglaze a pan, you dissolve the fond into liquid, capturing all that flavor. The document emphasizes that you should never skip scraping the fond because \"that is where all the flavor lives.\"",
+      "status": "success",
+      "duration_ms": 4531
+    },
+    {
+      "id": "12",
+      "question": "How long should I marinate fish or seafood?",
+      "difficulty": "easy",
+      "expected_doc_id": "doc_12_marinating",
+      "retrieved_doc_ids": [
+        "doc_12_marinating",
+        "doc_07_brining",
+        "doc_04_braising"
+      ],
+      "retrieval_correct": true,
+      "top_hit_doc_id": "doc_12_marinating",
+      "answer": "Based on the provided information, fish and seafood should be marinated for **15-30 minutes only**. The document notes that acid \"cooks\" fish, making it mushy if marinated longer.",
+      "status": "success",
+      "duration_ms": 2184
+    },
+    {
+      "id": "13",
+      "question": "What is the difference between wet and dry rendering fat?",
+      "difficulty": "medium",
+      "expected_doc_id": "doc_13_rendering_fat",
+      "retrieved_doc_ids": [
+        "doc_13_rendering_fat",
+        "doc_07_brining",
+        "doc_11_deglazing"
+      ],
+      "retrieval_correct": true,
+      "top_hit_doc_id": "doc_13_rendering_fat",
+      "answer": "Based on the provided context, here is the difference between wet and dry rendering fat:\n\n**Wet Rendering:**\n- Start with a little water\n- Produces gentler results\n- Creates lighter colored fat\n- Less flavor in the final product\n\n**Dry Rendering:**\n- No water is used\n- Produces more flavorful fat\n- Results in slightly darker fat\n- Requires more attention during the process",
+      "status": "success",
+      "duration_ms": 2869
+    },
+    {
+      "id": "14",
+      "question": "What happens if I burn spices while blooming them?",
+      "difficulty": "medium",
+      "expected_doc_id": "doc_14_blooming_spices",
+      "retrieved_doc_ids": [
+        "doc_14_blooming_spices",
+        "doc_05_caramelization",
+        "doc_12_marinating"
+      ],
+      "retrieval_correct": true,
+      "top_hit_doc_id": "doc_14_blooming_spices",
+      "answer": "Based on the provided information, if you burn spices while blooming them, they turn **bitter** and the result is **irreversible** — you must start over.\n\nThe document specifically states under \"COMMON MISTAKES\":\n- \"Heat too high — spices burn in seconds, turning bitter\"\n- \"Blooming too long — burnt spices are irreversible, must start over\"",
+      "status": "success",
+      "duration_ms": 2963
+    },
+    {
+      "id": "15",
+      "question": "How much does internal temperature rise after removing meat from heat?",
+      "difficulty": "hard",
+      "expected_doc_id": "doc_15_resting_meat",
+      "retrieved_doc_ids": [
+        "doc_15_resting_meat",
+        "doc_07_brining",
+        "doc_12_marinating"
+      ],
+      "retrieval_correct": true,
+      "top_hit_doc_id": "doc_15_resting_meat",
+      "answer": "Based on the provided information, the internal temperature rise after removing meat from heat (carryover cooking) depends on the size of the cut:\n\n- **Small cuts (steak, chops):** 3-5°F rise\n- **Medium roasts:** 5-10°F rise\n- **Large roasts (turkey, prime rib):** 10-15°F rise\n\nThe document advises removing meat from heat before reaching the target temperature to account for this carryover cooking.",
+      "status": "success",
+      "duration_ms": 3913
+    },
+    {
+      "id": "16",
+      "question": "Why should I use a spatula instead of a whisk when folding egg whites?",
+      "difficulty": "medium",
+      "expected_doc_id": "doc_16_folding",
+      "retrieved_doc_ids": [
+        "doc_16_folding",
+        "doc_01_blanching",
+        "doc_11_deglazing"
+      ],
+      "retrieval_correct": true,
+      "top_hit_doc_id": "doc_16_folding",
+      "answer": "Based on the provided information, you should use a spatula instead of a whisk when folding egg whites because using a whisk is \"too aggressive.\" \n\nThe document explains that beaten egg whites contain thousands of tiny air bubbles trapped in protein networks, and the goal of folding is to preserve these bubbles. Using a whisk instead of a spatula is listed as a common mistake because its aggressive action breaks the air bubbles, destroying the volume and lightness you worked to create.",
+      "status": "success",
+      "duration_ms": 3567
+    },
+    {
+      "id": "17",
+      "question": "How do I restore a rusty cast iron pan?",
+      "difficulty": "easy",
+      "expected_doc_id": "doc_17_seasoning_cast_iron",
+      "retrieved_doc_ids": [
+        "doc_17_seasoning_cast_iron",
+        "doc_11_deglazing",
+        "doc_07_brining"
+      ],
+      "retrieval_correct": true,
+      "top_hit_doc_id": "doc_17_seasoning_cast_iron",
+      "answer": "Based on the provided information, here's how to restore a rusty cast iron pan:\n\n**RESTORING RUSTY CAST IRON:**\n\n1. Scrub with steel wool until rust is gone\n2. Wash, dry completely\n3. Re-season from scratch following the initial seasoning steps\n\nThe initial seasoning steps to follow after removing the rust are:\n1. Wash pan with soap and hot water\n2. Dry completely — heat on stove for 2 minutes to evaporate all moisture\n3. Apply a very thin layer of oil (flaxseed, vegetable, or shortening) to entire surface including outside and handle\n4. Wipe off almost all the oil — it should look nearly dry (thick layers gum up)\n5. Place upside down in oven at 450-500°F\n6. Bake for 1 hour\n7. Turn off oven, let pan cool inside\n8. Repeat steps 3-6 times for a good base layer",
+      "status": "success",
+      "duration_ms": 5852
+    },
+    {
+      "id": "18",
+      "question": "What happens if I add cold liquid to a roux?",
+      "difficulty": "medium",
+      "expected_doc_id": "doc_18_making_roux",
+      "retrieved_doc_ids": [
+        "doc_18_making_roux",
+        "doc_11_deglazing"
+      ],
+      "retrieval_correct": true,
+      "top_hit_doc_id": "doc_18_making_roux",
+      "answer": "Based on the provided information:\n\nIf you add cold liquid to a roux, it **causes lumps that are hard to remove**.\n\nThe document specifically states under \"ADDING LIQUID\" that you should \"Add warm or hot liquid — cold liquid causes lumps\" and lists \"Adding cold liquid — causes lumps that are hard to remove\" as one of the common mistakes when making a roux.",
+      "status": "success",
+      "duration_ms": 3441
+    },
+    {
+      "id": "19",
+      "question": "How do aromatics added to steaming water affect the food?",
+      "difficulty": "hard",
+      "expected_doc_id": "doc_19_steaming",
+      "retrieved_doc_ids": [
+        "doc_19_steaming",
+        "doc_06_maillard_reaction",
+        "doc_05_caramelization"
+      ],
+      "retrieval_correct": true,
+      "top_hit_doc_id": "doc_19_steaming",
+      "answer": "Based on the provided information:\n\nWhen aromatics are added to the steaming water, the steam will carry subtle flavor into the food. You can add aromatics such as ginger, lemongrass, wine, or herbs to the water. Additionally, you can place aromatics directly under or around the food in the basket for flavor enhancement.",
+      "status": "success",
+      "duration_ms": 2473
+    },
+    {
+      "id": "20",
+      "question": "What is the claw grip and why is it important?",
+      "difficulty": "easy",
+      "expected_doc_id": "doc_20_knife_skills",
+      "retrieved_doc_ids": [
+        "doc_20_knife_skills",
+        "doc_16_folding",
+        "doc_09_reduction"
+      ],
+      "retrieval_correct": true,
+      "top_hit_doc_id": "doc_20_knife_skills",
+      "answer": "Based on the provided information:\n\n**What is the claw grip:**\nThe claw grip is a safety technique where you curl your fingertips under with your knuckles forward. The flat side of the knife blade rests against the knuckles, which guides the cut. Your fingertips should never protrude past the knuckles.\n\n**Why it is important:**\nIt is described as \"the most important safety technique\" for knife skills. It prevents cuts even if the knife slips, because the fingertips are protected behind the knuckles while the knuckles guide the blade.",
+      "status": "success",
+      "duration_ms": 4224
+    }
+  ]
+}
