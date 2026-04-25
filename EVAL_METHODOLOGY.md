@@ -196,12 +196,13 @@ Storing whole documents in a vector database causes:
 | 7 | LangChain | Everything wired manually | Rebuild the same BGE-large RAG pipeline using LangChain: HuggingFaceEmbeddings, Chroma, ChatAnthropic, PromptTemplate, LCEL chain | Framework fluency — same 95% accuracy proves parity; LCEL pipe operator composes retriever → prompt → LLM → parser | ✅ Done |
 | 6e | RAG Pattern — Agentic RAG | Fixed pipeline — always retrieves, always same way | Claude gets a `retrieve` tool via tool_use API — decides what query to use, calls it up to 5×, stops when it has enough | Fixed pipelines can't rephrase queries. Agent rephrased Q9 to "deglazing fond" → fixed it. Avg 1.6 calls/question. 95% → 100% | ✅ Done |
 | 6f | RAG Pattern — Graph RAG | Flat chunks in vector DB | Build knowledge graph (docs=nodes, shared concepts=edges), vector search → entry doc → graph traversal → neighbor context | Entry node accuracy is everything. Wrong vector start → wrong graph expansion. 95% → 75% (-20%). Harder failure than re-ranking | ✅ Done |
-| 8 | LlamaIndex | LangChain only | Use LlamaIndex for advanced chunking and data ingestion | Better chunking strategies, multi-modal, complex document pipelines | — |
-| 9 | Agentic Eval | Eval for single Q→A only | Evaluate a multi-step agent — not just one question → one answer | Trace-level evaluation, tool use, non-deterministic chain scoring | — |
-| 10 | Fine-tuning Eval | No baseline comparison framework | Compare model before and after fine-tuning on the same eval set | Regression testing, eval-driven fine-tune validation | — |
-| 11 | DeepLearning.AI Prompt Engineering | Ad-hoc prompting | Work through structured course modules with exercises | Chain-of-thought, few-shot, prompt chaining, structured techniques | — |
-| 12 | Production Eval Patterns | One-off experiments | Wire evals into CI/CD, build dashboards, add human review at scale | Evals in production — not just experiments but ongoing quality gates | — |
-| 13 | Portfolio — Tell Phase | Work done but not articulated | Write about what you built, publish on LinkedIn, prep interview stories | Articulate AI eval work confidently to hiring managers and peers | — |
+| 8 | LlamaIndex | LangChain only | Use LlamaIndex for advanced chunking, KnowledgeGraphIndex (proper Graph RAG), data ingestion | Better chunking strategies, typed graph triplets, more reliable entry node than our manual Graph RAG | ⬅️ Next |
+| 9 | MCP (Model Context Protocol) | Tools hardcoded inside each script | Expose RAG pipeline as an MCP server — any Claude agent calls it without rewriting integration | Standard protocol for Claude ↔ tools. Productionised version of Step 6e tool_use loop | — |
+| 10 | Agentic Eval | Eval for single Q→A only | Evaluate a multi-step agent — not just one question → one answer | Trace-level evaluation, tool use, non-deterministic chain scoring | — |
+| 11 | Fine-tuning Eval | No baseline comparison framework | Compare model before and after fine-tuning on the same eval set | Regression testing, eval-driven fine-tune validation | — |
+| 12 | DeepLearning.AI Prompt Engineering | Ad-hoc prompting | Work through structured course modules with exercises | Chain-of-thought, few-shot, prompt chaining, structured techniques | — |
+| 13 | Production Eval Patterns | One-off experiments | Wire evals into CI/CD, build dashboards, add human review at scale | Evals in production — not just experiments but ongoing quality gates | — |
+| 14 | Portfolio — Tell Phase | Work done but not articulated | Write about what you built, publish on LinkedIn, prep interview stories | Articulate AI eval work confidently to hiring managers and peers | — |
 
 ---
 
