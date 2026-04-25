@@ -196,7 +196,7 @@ Storing whole documents in a vector database causes:
 | 7 | LangChain | Everything wired manually | Rebuild the same BGE-large RAG pipeline using LangChain: HuggingFaceEmbeddings, Chroma, ChatAnthropic, PromptTemplate, LCEL chain | Framework fluency — same 95% accuracy proves parity; LCEL pipe operator composes retriever → prompt → LLM → parser | ✅ Done |
 | 6e | RAG Pattern — Agentic RAG | Fixed pipeline — always retrieves, always same way | Claude gets a `retrieve` tool via tool_use API — decides what query to use, calls it up to 5×, stops when it has enough | Fixed pipelines can't rephrase queries. Agent rephrased Q9 to "deglazing fond" → fixed it. Avg 1.6 calls/question. 95% → 100% | ✅ Done |
 | 6f | RAG Pattern — Graph RAG | Flat chunks in vector DB | Build knowledge graph (docs=nodes, shared concepts=edges), vector search → entry doc → graph traversal → neighbor context | Entry node accuracy is everything. Wrong vector start → wrong graph expansion. 95% → 75% (-20%). Harder failure than re-ranking | ✅ Done |
-| 8 | LlamaIndex | LangChain only | Use LlamaIndex for advanced chunking, KnowledgeGraphIndex (proper Graph RAG), data ingestion | Better chunking strategies, typed graph triplets, more reliable entry node than our manual Graph RAG | ⬅️ Next |
+| 8 | LlamaIndex | LangChain only | SimpleDirectoryReader, SentenceSplitter(512, overlap=50), VectorStoreIndex, as_query_engine() | Chunking strategy matters as much as the model. SentenceSplitter fixed Q9 that all manual pipelines missed (except HyDE + Agentic). 95% → 100% | ✅ Done |
 | 9 | MCP (Model Context Protocol) | Tools hardcoded inside each script | Expose RAG pipeline as an MCP server — any Claude agent calls it without rewriting integration | Standard protocol for Claude ↔ tools. Productionised version of Step 6e tool_use loop | — |
 | 10 | Agentic Eval | Eval for single Q→A only | Evaluate a multi-step agent — not just one question → one answer | Trace-level evaluation, tool use, non-deterministic chain scoring | — |
 | 11 | Fine-tuning Eval | No baseline comparison framework | Compare model before and after fine-tuning on the same eval set | Regression testing, eval-driven fine-tune validation | — |
@@ -1304,3 +1304,69 @@ Our corpus: 20 small docs, several with weak vector signal → entry node unreli
 | Agentic RAG | 100% | Dynamic query reformulation — flexible |
 | LangChain | 95% | Framework parity — same accuracy, better structure |
 | **Graph RAG** | **75% (-20%)** | **Entry node failure cascades — wrong start, wrong expansion** |
+
+---
+
+## Step 8 — LlamaIndex RAG Pipeline
+
+### What changed
+Same BGE-large model, same ChromaDB, same grounded prompt. Only the framework and chunking strategy changed.
+
+| Manual pipeline | LlamaIndex |
+|---|---|
+| Read .txt files ourselves | `SimpleDirectoryReader("data/docs/")` — 1 line, handles all file types |
+| Section-based chunking (rigid splits at headers) | `SentenceSplitter(chunk_size=512, overlap=50)` — splits at sentence boundaries, overlapping |
+| `chromadb.PersistentClient()` + manual embed | `ChromaVectorStore` + `StorageContext` |
+| retrieve → format → generate loop | `index.as_query_engine().query(question)` — one call |
+| Custom grounded prompt as f-string | `PromptTemplate` with same constraint |
+
+### Result
+
+**100% (20/20) — Q9 fixed**
+
+Q9 top hit: `doc_11_deglazing` — retrieved correctly for the first time without HyDE or an agent.
+
+### Why Q9 got fixed — the chunking insight
+
+Our manual chunking split docs at section headers:
+```
+[Section: PAN SAUCE METHOD]
+  content about building pan sauce...
+
+[Section: REDUCTION STAGES]
+  content about concentrating liquids...
+```
+
+LlamaIndex's `SentenceSplitter` with `overlap=50` creates overlapping chunks:
+```
+chunk_1: "...pan sauce...deglazing fond...reduce liquid..."
+chunk_2: "...reduce liquid...concentration...glace de viande..."  ← overlaps with chunk_1
+```
+
+Overlapping chunks mean concepts that sit across section boundaries get captured in the same chunk. The pan sauce question found a chunk that spanned both the deglazing method and the reduction technique — exactly the cross-section context it needed.
+
+**The lesson: Q9 was also a chunking problem, not just a retrieval problem.**
+
+### What LlamaIndex teaches
+
+| Concept | What it means |
+|---|---|
+| `SimpleDirectoryReader` | Framework handles file loading — you focus on the pipeline, not I/O |
+| `SentenceSplitter` | Smarter than fixed-size or header-based — respects sentence boundaries, overlap preserves context |
+| `StorageContext` | Wires vector store + docstore + index — separation of concerns |
+| `as_query_engine()` | Retriever + synthesizer = one composable object. Swap retrievers without rewriting generation |
+| `Settings` | Global config — set embed model and LLM once, everything inherits |
+
+### Updated full comparison — all 9 pipelines
+
+| Pipeline | Accuracy | Key lesson |
+|---|---|---|
+| Standard MiniLM (384d) | 85% | Baseline — representation too coarse |
+| Standard BGE (1024d) | 95% | Better dims fix representation failures |
+| Re-ranking | 90% (-5%) | Out-of-domain model hurts more than it helps |
+| Branched RAG | 95% | BM25 additive — no regression |
+| HyDE | 100% | Vocabulary mismatch fix |
+| Agentic RAG | 100% | Dynamic query reformulation |
+| LangChain | 95% | Framework parity — same accuracy, better structure |
+| Graph RAG | 75% (-20%) | Entry node failure cascades |
+| **LlamaIndex** | **100%** | **Chunking strategy matters as much as the model** |
