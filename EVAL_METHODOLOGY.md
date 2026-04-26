@@ -197,7 +197,7 @@ Storing whole documents in a vector database causes:
 | 6e | RAG Pattern — Agentic RAG | Fixed pipeline — always retrieves, always same way | Claude gets a `retrieve` tool via tool_use API — decides what query to use, calls it up to 5×, stops when it has enough | Fixed pipelines can't rephrase queries. Agent rephrased Q9 to "deglazing fond" → fixed it. Avg 1.6 calls/question. 95% → 100% | ✅ Done |
 | 6f | RAG Pattern — Graph RAG | Flat chunks in vector DB | Build knowledge graph (docs=nodes, shared concepts=edges), vector search → entry doc → graph traversal → neighbor context | Entry node accuracy is everything. Wrong vector start → wrong graph expansion. 95% → 75% (-20%). Harder failure than re-ranking | ✅ Done |
 | 8 | LlamaIndex | LangChain only | SimpleDirectoryReader, SentenceSplitter(512, overlap=50), VectorStoreIndex, as_query_engine() | Chunking strategy matters as much as the model. SentenceSplitter fixed Q9 that all manual pipelines missed (except HyDE + Agentic). 95% → 100% | ✅ Done |
-| 9 | MCP (Model Context Protocol) | Tools hardcoded inside each script | Expose RAG pipeline as an MCP server — any Claude agent calls it without rewriting integration | Standard protocol for Claude ↔ tools. Productionised version of Step 6e tool_use loop | — |
+| 9 | MCP (Model Context Protocol) | Tools hardcoded inside each script | Expose RAG pipeline as an MCP server — any Claude agent calls it without rewriting integration | Standard protocol for Claude ↔ tools. Productionised version of Step 6e tool_use loop | ✅ Done |
 | 10 | Agentic Eval | Eval for single Q→A only | Evaluate a multi-step agent — not just one question → one answer | Trace-level evaluation, tool use, non-deterministic chain scoring | — |
 | 11 | Fine-tuning Eval | No baseline comparison framework | Compare model before and after fine-tuning on the same eval set | Regression testing, eval-driven fine-tune validation | — |
 | 12 | DeepLearning.AI Prompt Engineering | Ad-hoc prompting | Work through structured course modules with exercises | Chain-of-thought, few-shot, prompt chaining, structured techniques | — |
@@ -1370,3 +1370,75 @@ Overlapping chunks mean concepts that sit across section boundaries get captured
 | LangChain | 95% | Framework parity — same accuracy, better structure |
 | Graph RAG | 75% (-20%) | Entry node failure cascades |
 | **LlamaIndex** | **100%** | **Chunking strategy matters as much as the model** |
+
+---
+
+## Step 9 — MCP (Model Context Protocol)
+
+### What changed
+In Step 6e (Agentic RAG), the `retrieve` tool was defined *inside* `agentic_pipeline.py`. Only that script could use it. MCP makes the tool a standalone server — any Claude instance can call it.
+
+```
+Step 6e (tool_use — inline):        Step 9 (MCP — server):
+  retrieve() lives inside              retrieve() lives in mcp_server.py
+  agentic_pipeline.py          →       ANY Claude instance calls it
+  only that script uses it             no rewriting integration per project
+```
+
+### Tools exposed
+
+| Tool | What it does |
+|---|---|
+| `search_cooking_knowledge(query, top_k)` | Retrieve chunks from ChromaDB — returns doc_id, topic, section, content, distance |
+| `ask_cooking_question(question)` | Full RAG pipeline: retrieve + generate grounded answer |
+
+**Resource:** `cooking://topics` — list of all 20 cooking topics in the knowledge base
+
+### How Claude calls it
+
+Once the MCP server is wired into Claude Code settings.json, Claude can call:
+```
+Use the search_cooking_knowledge tool to find information about pan sauce techniques
+```
+No code changes. No API integration. Claude speaks MCP, the server handles the rest.
+
+### How to connect to Claude Code
+
+```json
+// ~/.claude/settings.json
+{
+  "mcpServers": {
+    "cooking-rag": {
+      "command": "python3",
+      "args": ["/Users/vipin/Downloads/vp-rag-eval/mcp_server.py"],
+      "env": { "ANTHROPIC_API_KEY": "<your key>" }
+    }
+  }
+}
+```
+
+### Step 6e vs Step 9 — the key distinction
+
+| | Step 6e (Agentic RAG) | Step 9 (MCP) |
+|---|---|---|
+| Where tool lives | Inside the script | Standalone server |
+| Who can call it | Only that script | Any Claude instance |
+| Reusability | Zero | Universal |
+| Change retrieval logic | Edit agentic_pipeline.py | Edit mcp_server.py — all callers get the update |
+| Production pattern | Prototype | How real tools are deployed |
+
+### What MCP teaches
+
+- **Separation of concerns** — the tool implementation is separate from who uses it
+- **Reusability** — build once, use everywhere (Claude Code, Claude.ai, any MCP-compatible app)
+- **Standard protocol** — same interface regardless of what's inside the server
+- **Productionised tool_use** — Step 6e showed the concept, Step 9 shows how it ships
+
+### Where MCP fits in the stack
+
+```
+RAG pattern (HyDE, Agentic, Graph)   — what retrieval strategy to use
+LangChain / LlamaIndex               — framework to build the pipeline
+MCP                                  — how to expose the pipeline as a reusable service
+LangSmith                            — observability for what runs through it
+```
